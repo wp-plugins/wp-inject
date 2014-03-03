@@ -135,7 +135,7 @@
 }
 
 .wpdf_bigger {
-	width: 300px;
+	width: 310px;
     background: none repeat scroll 0 0 #FFFFFF;
     border: 1px solid #AAAAAA;
     box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.35);
@@ -157,7 +157,7 @@
 }
 
 .wpdf_bigger_img {
-	width: 300px;
+	width: 310px;
 }
 
 .wpdf_insert_links a {

@@ -28,7 +28,6 @@ function wpdf_editor_ajax_action_function() {
 
 	global $source_infos, $modulearray;
 	@require_once("api.class.php");	
-	@require_once("api.class.php");	
 	
 	$options = get_option("wpinject_settings");
 	$items_per_req = $options["general"]["options"]["items_per_req"]["value"];

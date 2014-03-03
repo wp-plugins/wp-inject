@@ -99,9 +99,45 @@ function wpdf_parse_attribution(item) {
 	var owner_name = jQuery('#' + item).find(".wpdf_result_item_save .name").text(); 
 	var owner_link = jQuery('#' + item).find(".wpdf_result_item_save .link").text(); 
 	
+	var license = jQuery('#' + item).find(".wpdf_result_item_save .license").text(); 
+	if(license == "0") {
+		var license_name = "All Rights Reserved";
+		var license_link = "";
+	} else if(license == "1") {
+		var license_name = "Attribution-NonCommercial-ShareAlike License";
+		var license_link = "http://creativecommons.org/licenses/by-nc-sa/2.0/";
+	} else if(license == "2") {
+		var license_name = "Attribution-NonCommercial License";
+		var license_link = "http://creativecommons.org/licenses/by-nc/2.0/";
+	} else if(license == "3") {
+		var license_name = "Attribution-NonCommercial-NoDerivs License";
+		var license_link = "http://creativecommons.org/licenses/by-nc-nd/2.0/";
+	} else if(license == "4") {
+		var license_name = "Attribution License";
+		var license_link = "http://creativecommons.org/licenses/by/2.0/";
+	} else if(license == "5") {
+		var license_name = "Attribution-ShareAlike License";
+		var license_link = "http://creativecommons.org/licenses/by-sa/2.0/";
+	} else if(license == "6") {
+		var license_name = "Attribution-NoDerivs License";
+		var license_link = "http://creativecommons.org/licenses/by-nd/2.0/";
+	} else {
+		var license_name = "";
+		var license_link = "";	
+	}
+
+	if(license_name != "" && license_link != "") {
+		var cc_icon = '<a rel="nofollow" href="' + license_link + '" target="_blank" title="' + license_name + '"><img src="' + wpdf_plugin_url + '/images/cc.png" /></a>';
+	} else {
+		var cc_icon = '';
+	}
+	
 	template = template.replace('{keyword}', jQuery('#wpdf_keyword').val());		
 	template = template.replace('{author}', owner_name);
 	template = template.replace('{link}', owner_link);
+	template = template.replace('{cc_icon}', cc_icon);
+	template = template.replace('{license_name}', license_name);
+	template = template.replace('{license_link}', license_link);
 	
 	if(wpdf_wpi_attr == "1") {
 		template = template.replace('Photo', '<a style="text-decoration: none;" href="http://wpinject.com/" title="Insert images into WordPress blog posts">Photo</a>');

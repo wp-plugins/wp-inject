@@ -2,7 +2,7 @@
 /**
  Plugin Name: WP Inject
  Plugin URI: http://wpinject.com/
- Version: 0.30
+ Version: 0.31
  Description: Insert photos into your posts or set a featured image in less than a minute! WP Inject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post!
  Author: Thomas Hoefter
  Author URI: http://wpinject.com/
@@ -76,6 +76,13 @@ function wpdf_settings_page() {
 	$options = $modulearray;
 	$optionsarray = get_option("wpinject_settings");
 
+	if($_GET["test"] == 1) {	
+		@require_once("api.class.php");	
+		$api = new wpdf_API_request;
+		$result = $api->api_content_bulk("fun", array("flickr" => array("count" => 5, "start" => 1))); 
+		print_r($result);
+	}
+	
 	if($_POST["save_options"]) {
 		foreach($options as $module => $moduledata) {
 
@@ -251,6 +258,9 @@ function wpdf_settings_page() {
 		<strong>{keyword}</strong> - The keyword you searched for with WP Inject.<br/>
 		<strong>{author}</strong> - Flickr name or username of the author.<br/>
 		<strong>{link}</strong> - Link to the image page on Flickr<br/>
+		<strong>{cc_icon}</strong> - A small creative commons icon with a link to the license<br/>
+		<strong>{license_name}</strong> - The name of the creative commons license the photo uses<br/>
+		<strong>{license_link}</strong> - The link to the creative commons license the photo uses<br/>
 	</p>	
 <?php
 }

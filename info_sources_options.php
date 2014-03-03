@@ -2,7 +2,7 @@
 $source_infos = array(
 	"sources" => array(			
 		"flickr" => array(
-			"request" => 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={appid}&text={keyword}&sort={sort}&content_type={cont}&license={license}&extras=owner_name%2C+url_sq%2C+url_t%2C+url_s%2C+url_m%2C+url_l%2C+url_o%2C+url_q%2C+description&per_page={num}&page={start}',	
+			"request" => 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={appid}&text={keyword}&sort={sort}&content_type={cont}&license={license}&extras=license%2C+owner_name%2C+url_sq%2C+url_t%2C+url_s%2C+url_m%2C+url_l%2C+url_o%2C+url_q%2C+description&per_page={num}&page={start}',	
 			//"request" => 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={appid}&text={keyword}&sort={sort}&content_type={cont}&license={license}&extras=date_taken%2C+owner_name%2C+icon_server%2C+geo%2C+tags%2C+machine_tags%2C+media%2C+path_alias%2C+url_q%2C+url_n%2C+url_c%2C+url_z%2C+url_sq%2C+url_t%2C+url_s%2C+url_m%2C+url_l%2C+url_o%2C+description&per_page={num}&page={start}',
 			"limits" => array("request" => 500, "total" => 4000),		
 			"title" => "title",		
@@ -34,7 +34,7 @@ $modulearray = array(
 		"templates" => array(
 			"default" => array(
 				"name" => "Medium Image",
-				"content" => '<div class="owner">{owner}</div><div class="title">{title}</div>
+				"content" => '<div class="owner">{owner}</div><div class="title">{title}</div><div class="license">{license}</div>
 				<div class="sizes">
 				<div class="square"><strong>SQ</strong> {width_q} x {height_q}px</div>
 				<div class="small"><strong>S</strong> {width_s} x {height_s}px</div>
@@ -62,7 +62,7 @@ $modulearray = array(
 		"name" => "Advanced Settings",
 		"options" => array(
 			"img_template" => array("value" => '<img title="{title} by {author}" alt="{keyword} photo" src="{src}" />', "name" => "Image Template", "type" => "textarea"),	
-			"attr_template" => array("value" => '<small>Photo by <a href="{link}" target="_blank">{author}</a></small>', "name" => "Attribution Template", "type" => "textarea"),	
+			"attr_template" => array("value" => '<small>Photo by <a href="{link}" target="_blank">{author}</a> {cc_icon}</small>', "name" => "Attribution Template", "type" => "textarea"),	
 			"attr_template_multi" => array("value" => '<small>Photos by {linklist}</small>', "name" => "Multi Photo Insert Attribution", "type" => "textarea"),	
 		)
 	),		

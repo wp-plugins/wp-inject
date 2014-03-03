@@ -1,8 +1,8 @@
 ﻿=== WP Inject ===
 Contributors: thoefter
-Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative, commons, gallery, media, thumbnail
+Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative, commons, gallery, media, thumbnail, seo
 Tested up to: 3.8.1
-Stable tag: trunk
+Stable tag: 0.31
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,11 +12,13 @@ Easily insert images and photos into your blog posts! WP Inject searches the hug
 
 [WP Inject](http://wpinject.com/ "Free plugin to insert images into WordPress posts") allows you to easily insert photos and images into your WordPress posts. Search among many thousands of creative commons images for any keywords of your choice, then pick the best of them for the article you are working on and insert them into your post or set them as featured image! Best of all it is super fast: Injecting an image only takes 3 clicks in total!
 
-No further setup is required after installing WP Inject and you can start inserting photos right away. The plugin adds an easy to use search metabox to your WordPress editor ("Add New" post screens) which you will use to search for great photos. If you want you can head to the WP Inject settings page and fine tune it by configuring its many options to your liking.
+No further setup is required after installing WP Inject. You can start inserting photos right away! To do so the plugin adds an easy to use search metabox to your WordPress editor ("Add New" post screens). Simply enter any keyword to find great photos for your post. 
 
-Have a look at my [tutorial on how to install and use WP Inject](http://wpinject.com/tutorial/ "How to insert images with WP Inject") to get started with the plugin. There you will also find an explanation of all available settings and what they do.
+Advanced users can head to the WP Inject settings page and fine tune the plugin. A lot of different options let you control most aspects of how WP Inject finds and inserts images into your posts. By editing the templates you can control exactly how the photos and automatic attribution will look on your blog!
 
-= Features =
+Have a look at my [tutorial on how to install and use WP Inject](http://wpinject.com/tutorial/ "How to insert images with WP Inject") to get started with the plugin. Besides explaining the basics the tutorial also contains details on all the available settings in WP Inject and how the plugin works together with WordPress SEO by Yoast. 
+
+= Features: =
 *  Search thousands of creative commons photos and include any into your posts.
 *  Fast and easy: Inserting images takes 3 clicks and less than a minute!
 *  Automatically adds the required attribution links next to the image.
@@ -27,6 +29,7 @@ Have a look at my [tutorial on how to install and use WP Inject](http://wpinject
 *  Images are saved to your own server and added to the WordPress media library.
 *  Automatically populated ALT and title tags of the image for search engine optimization.
 *  Search for many different keywords and compare the results to find the best matches.
+*  Can use and insert your focus keyword set in WordPress SEO by Yoast for easier image search optimization.
 
 This is the first release of WP Inject! It was only tested in WordPress 3.8 and 3.8.1. If you find any bugs please report them! Feedback or feature requests are also welcome. 
 
@@ -37,6 +40,10 @@ I plan to update WP Inject regularly. The following is a list of all the feature
 *  Insert other things – Youtube videos, Amazon ads and more!
 
 == Changelog ==  
+
+= 0.31 =
+- Adds a small CC icon to attribution text linking to the photo license.
+- New tags for the attribution template: {cc_icon}, {license_name}, {license_link}
 
 = 0.30 =
 - New attribution template setting.
