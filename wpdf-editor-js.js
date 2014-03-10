@@ -329,18 +329,29 @@ jQuery(document).ready(function($) {
 		var jthis = jQuery(this);
 		var item = jQuery(this).parents().eq(4).attr('id');
 		var src = jQuery('#' + item).find(".wpdf_result_item_save .img").text(); 
-
+		var keyword = jQuery('#wpdf_keyword').val();
+		
 		src = wpdf_get_image_size_url(src, wpdf_feat_img_size)
 
 		var loader = wpdf_set_message('<img src="' + wpdf_plugin_url + '/images/ajax-loader.gif" style="width: 16px; height: 16px;margin-bottom: -2px;" /> Loading...', 0, 1, 0);
 		jQuery(this).hide();		
 				
-		var data = {
+		/*var data = {
 			action: 'wpdf_set_featured',
 			wpnonce: wpdf_security_nonce.security,
 			src: src,
 			post_id: cur_post_id			
-		};
+		};*/
+		
+		var data = {
+			action: 'wpdf_save_to_server',
+			wpnonce: wpdf_security_nonce.security,
+			src: src,
+			post_id: cur_post_id,
+			feat_img: 1,
+			filename: wpdf_filename_template,
+			keyword: keyword
+		};		
 			
 		jQuery.ajax ({
 			type: 'POST',
@@ -374,7 +385,7 @@ jQuery(document).ready(function($) {
 		
 		var imgsize = jQuery(this).attr('class').replace('wpdf_insert_','');	
 		var item = jQuery(this).parents().eq(4).attr('id');
-
+		var keyword = jQuery('#wpdf_keyword').val();
 		var attrcontent = wpdf_parse_attribution(item);
 		
 		if(wpdf_save_images == 1) {
@@ -387,8 +398,10 @@ jQuery(document).ready(function($) {
 				action: 'wpdf_save_to_server',
 				wpnonce: wpdf_security_nonce.security,
 				src: imgurl,
-				post_id: cur_post_id			
-				};
+				post_id: cur_post_id,
+				filename: wpdf_filename_template,
+				keyword: keyword				
+			};
 				
 			jQuery.ajax ({
 				type: 'POST',

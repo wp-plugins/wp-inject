@@ -54,7 +54,7 @@ $modulearray = array(
 			"default_align" => array("value" => "none", "name" => "Default Image Alignment", "type" => "select", "values" => array("none" => "None", "left" => "Left", "right" => "Right", "center" => "Center")),						
 			"attr_location" => array("value" => "bottom", "name" => "Attribution Location", "type" => "select", "values" => array("bottom" => "Bottom of Post", "image" => "Next to the Image")),						
 			"items_per_req" => array("value" => "40", "name" => "Results per Search", "type" => "select", "values" => array("20" => "20", "30" => "30", "40" => "40", "50" => "50", "60" => "60", "80" => "80", "100" => "100")),									
-			"wpi_attr" => array("value" => 0, "name" => "Enable WP Inject Link", "type" => "checkbox", "info" => "Yes (adds an unobtrusive link to wpinject.com in the image attribution text. If you do not use this I would appreciate if you could share WP Inject in another way - via social media, by blogging about it or simply telling others! Thanks.)"),	
+			"wpi_attr" => array("value" => 0, "name" => "Enable WP Inject Link", "type" => "checkbox", "info" => "Yes (adds an unobtrusive link to wpinject.com inside the image attribution. If you do not use this please share WP Inject in another way, e.g. via social media or by blogging about it. Thanks!)"),	
 		)
 	),	
 	"advanced" => array(
@@ -64,6 +64,7 @@ $modulearray = array(
 			"img_template" => array("value" => '<img title="{title} by {author}" alt="{keyword} photo" src="{src}" />', "name" => "Image Template", "type" => "textarea"),	
 			"attr_template" => array("value" => '<small>Photo by <a href="{link}" target="_blank">{author}</a> {cc_icon}</small>', "name" => "Attribution Template", "type" => "textarea"),	
 			"attr_template_multi" => array("value" => '<small>Photos by {linklist}</small>', "name" => "Multi Photo Insert Attribution", "type" => "textarea"),	
+			"filename_template" => array("value" => '{filename}_{keyword}', "name" => "Filename Template", "type" => "textarea"),	
 		)
 	),		
 

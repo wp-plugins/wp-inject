@@ -2,7 +2,7 @@
 /**
  Plugin Name: WP Inject
  Plugin URI: http://wpinject.com/
- Version: 0.31
+ Version: 0.40
  Description: Insert photos into your posts or set a featured image in less than a minute! WP Inject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post!
  Author: Thomas Hoefter
  Author URI: http://wpinject.com/
@@ -72,7 +72,7 @@ function wpdf_settings_page_head() {
 
 function wpdf_settings_page() {
 	global $source_infos, $modulearray;
-	
+
 	$options = $modulearray;
 	$optionsarray = get_option("wpinject_settings");
 
@@ -138,23 +138,28 @@ function wpdf_settings_page() {
 		}	
 	}
 ?>
+
 <div class="wrap">
 
-	<div id="wpdf_settings_box">
-		<p style="margin-top: 0;">To <strong>insert images</strong> go to the WordPress "<a href="post-new.php">New Post</a>" or "<a href="post-new.php?post_type=page">New Page</a>" screens where you will find the WP Inject metabox to search for great photos!</p>
-		
-		<p>Please <a href="http://wpinject.com/tutorial/" target="_blank"><strong>read my short WP Inject tutorial</strong></a> for more details on all the settings on this page and what exactly they do.</p>
-	
-		<p>Having problems or found a bug? Please <a href="http://wpinject.com/contact" target="_blank">contact me</a> or post in the WordPress support forum.</p>
-	
-		<p style="margin-bottom: 0;">If you find WP Inject useful <strong>please share!</strong><br/>
-			<a title="Share WP Inject on Twitter" target="_blank" class="wpdf_share_twitter" href="https://twitter.com/home?status=I%20am%20using%20WP%20Inject%20to%20insert%20CC%20images%20into%20my%20blog%20fast%20and%20for%20free:%20http://wpinject.com"></a>
-			<a title="Share WP Inject on Facebook" target="_blank" class="wpdf_share_fb" href="https://www.facebook.com/sharer/sharer.php?u=http://wpinject.com"></a>
-			<a title="Share WP Inject on Google+" target="_blank" class="wpdf_share_google" href="https://plus.google.com/share?url=http://wpinject.com"></a>
-		</p>
-	</div>
-
 	<h2><?php _e("WP Inject Settings","wpinject") ?></h2>
+	
+	<div style="width:28%;float: right;">		
+		<div id="wpdf_settings_box">
+			<p style="margin-top: 0;">To <strong>insert images</strong> go to the WordPress "<a href="post-new.php">New Post</a>" or "<a href="post-new.php?post_type=page">New Page</a>" screens where you will find the WP Inject metabox to search for great photos!</p>
+			
+			<p>Please <a href="http://wpinject.com/tutorial/" target="_blank"><strong>read my short WP Inject tutorial</strong></a> for more details on all the settings on this page and what exactly they do.</p>
+		
+			<p>Having problems or found a bug? Please <a href="http://wpinject.com/contact" target="_blank">contact me</a> or post in the WordPress support forum.</p>
+		
+			<p style="margin-bottom: 0;">If you find WP Inject useful <strong>please share!</strong><br/>
+				<a title="Share WP Inject on Twitter" target="_blank" class="wpdf_share_twitter" href="https://twitter.com/home?status=I%20am%20using%20WP%20Inject%20to%20insert%20CC%20images%20into%20my%20blog%20fast%20and%20for%20free:%20http://wpinject.com"></a>
+				<a title="Share WP Inject on Facebook" target="_blank" class="wpdf_share_fb" href="https://www.facebook.com/sharer/sharer.php?u=http://wpinject.com"></a>
+				<a title="Share WP Inject on Google+" target="_blank" class="wpdf_share_google" href="https://plus.google.com/share?url=http://wpinject.com"></a>
+			</p>
+		</div>	
+	</div>	
+	
+	<div style="width:71%;">
 	
 	<form method="post" name="wpdf_options">	
 	
@@ -240,6 +245,9 @@ function wpdf_settings_page() {
 		</div>	
 	<?php } ?>
 	
+	</form>
+	</div>
+	
 	<p class="submit"><input class="button-primary" type="submit" name="save_options" value="<?php _e("Save All Settings","wpinject") ?>" /></p>	
 
 	<h3>Available Template Tags</h3>
@@ -261,6 +269,14 @@ function wpdf_settings_page() {
 		<strong>{cc_icon}</strong> - A small creative commons icon with a link to the license<br/>
 		<strong>{license_name}</strong> - The name of the creative commons license the photo uses<br/>
 		<strong>{license_link}</strong> - The link to the creative commons license the photo uses<br/>
+	</p>
+	<p>The following tags are available in the "<strong>Filename Template</strong>" field:</p>	
+	<p>
+		<strong>{filename}</strong> - The original filename.<br/>
+		<strong>{keyword}</strong> - The keyword you searched for.<br/>
+		<strong>{timestamp}</strong> - Timestamp of when the image was uploaded to your blog.<br/>
+		<strong>{date}</strong> - Date of when the image was uploaded to your blog.<br/>		
+		<strong>{rand}</strong> - A random number.<br/>
 	</p>	
 <?php
 }
@@ -386,11 +402,12 @@ function wpdf_editor_head() {
 	<?php } else { ?>
 		var wpdf_save_images = 0;
 	<?php } ?>
-
+	
 	var wpdf_default_align = '<?php echo $options["general"]["options"]["default_align"]["value"]; ?>'; 	
 	var wpdf_img_template = '<?php echo $options["advanced"]["options"]["img_template"]["value"]; ?>'; 	
 	var wpdf_attr_template = '<?php echo $options["advanced"]["options"]["attr_template"]["value"]; ?>'; 
 	var wpdf_attr_template_multi = '<?php echo $options["advanced"]["options"]["attr_template_multi"]["value"]; ?>'; 
+	var wpdf_filename_template = '<?php echo $options["advanced"]["options"]["filename_template"]["value"]; ?>'; 
 	var wpdf_attr_location = '<?php echo $options["general"]["options"]["attr_location"]["value"]; ?>'; 
 	var wpdf_wpi_attr = '<?php echo $options["general"]["options"]["wpi_attr"]["value"]; ?>'; 
 	var wpdf_feat_img_size = '<?php echo $options["general"]["options"]["feat_img_size"]["value"]; ?>'; 
@@ -423,9 +440,10 @@ if(is_admin()){
 	if($pagenow == 'admin-ajax.php'){
 		require_once('wpdf_ajax.php');
 		add_action('wp_ajax_wpdf_editor', 'wpdf_editor_ajax_action_function');
-		add_action('wp_ajax_wpdf_set_featured', 'wpdf_editor_ajax_set_featured_function');	
-		add_action('wp_ajax_wpdf_save_keys', 'wpdf_editor_ajax_save_keys_function');	
-		add_action('wp_ajax_wpdf_save_to_server', 'wpdf_editor_ajax_save_to_server_function');	
+		//add_action('wp_ajax_wpdf_set_featured', 'wpdf_editor_ajax_set_featured_function');	
+		//add_action('wp_ajax_wpdf_save_keys', 'wpdf_editor_ajax_save_keys_function');	
+		//add_action('wp_ajax_wpdf_save_to_server', 'wpdf_editor_ajax_save_to_server_function');	
+		add_action('wp_ajax_wpdf_save_to_server', 'wpdf_save_image_function');
 	}
 }
 ?>
