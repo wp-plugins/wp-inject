@@ -2,7 +2,7 @@
 /**
  Plugin Name: WP Inject
  Plugin URI: http://wpinject.com/
- Version: 0.40
+ Version: 0.41
  Description: Insert photos into your posts or set a featured image in less than a minute! WP Inject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post!
  Author: Thomas Hoefter
  Author URI: http://wpinject.com/
@@ -159,10 +159,9 @@ function wpdf_settings_page() {
 		</div>	
 	</div>	
 	
-	<div style="width:71%;">
-	
 	<form method="post" name="wpdf_options">	
-	
+	<div style="width:71%;">
+
 	<p class="submit"><input class="button-primary" type="submit" name="save_options" value="<?php _e("Save All Settings","wpinject") ?>" /></p>		
 
 	<?php $num = 0; foreach($options as $module => $moduledata) { $num++; ?>
@@ -245,11 +244,13 @@ function wpdf_settings_page() {
 		</div>	
 	<?php } ?>
 	
-	</form>
+
 	</div>
 	
 	<p class="submit"><input class="button-primary" type="submit" name="save_options" value="<?php _e("Save All Settings","wpinject") ?>" /></p>	
 
+	</form>	
+	
 	<h3>Available Template Tags</h3>
 	<p>You can use the following tags in the "<strong>Image Template</strong>" setting field:</p>
 	<p>

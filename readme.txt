@@ -2,7 +2,7 @@
 Contributors: thoefter
 Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo
 Tested up to: 3.8.1
-Stable tag: 0.40
+Stable tag: 0.41
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 
 == Changelog ==  
+
+= 0.41 =
+- Fixes a bug that prevented one of the "Save Settings" buttons on the options page from working.
 
 = 0.40 =
 - Adds "Filename Template" setting, allowing you to customize the filename of saved images, e.g. for SEO reasons.
