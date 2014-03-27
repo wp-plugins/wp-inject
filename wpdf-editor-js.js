@@ -299,28 +299,92 @@ jQuery(document).ready(function($) {
 		var orientation = jQuery(this).attr('id').replace('wpdf_insert_images_','');
 		var imgsize = jQuery('input:radio[name=wpdf_size]:checked').val();
 		var imgcontent = "";
-		
 		var attrcontentall = "";
+		
+		if(wpdf_save_images == 1) { // display loading graphic
 
-		jQuery("input:checkbox[name=wpdf_select_item]:checked").each(function() {
-
-			var item = jQuery(this).parent().parent().attr('id');
-			var attrcontent = wpdf_parse_attribution(item);
-			var addcontent = wpdf_parse_template(item, imgsize, "", orientation);
-
-			imgcontent += addcontent;
+			var loader = wpdf_set_message('<img src="' + wpdf_plugin_url + '/images/ajax-loader.gif" style="width: 16px; height: 16px;margin-bottom: -2px;" /> Saving all images to your server.', 0, 1, 0);
+			var all_images = new Array();
 			
-			var owner_name = jQuery('#' + item).find(".wpdf_result_item_save .name").text(); 
-			var owner_link = jQuery('#' + item).find(".wpdf_result_item_save .link").text(); 			
-					
-			attrcontentall += '<a href="' + owner_link + '">' + owner_name + '</a>, ';
-		});	
-		
-		var attr = wpdf_parse_attribution_multi(attrcontentall);
-		
-		wpdf_parse_content(imgcontent, attr, 0);
-		
-		wpdf_set_message("<strong>Selected images have been inserted into the editor.</strong>", 0, 0, 0);
+			jQuery("input:checkbox[name=wpdf_select_item]:checked").each(function() {
+				var item = jQuery(this).parent().parent().attr('id');
+				
+				var imgurl = jQuery('#' + item).find(".wpdf_result_item_save .img").text(); 
+				imgurl = wpdf_get_image_size_url(imgurl, imgsize);	
+				all_images.push(imgurl);
+			});	
+
+			var keyword = jQuery('#wpdf_keyword').val();
+			var data = {
+				action: 'wpdf_save_multiple_to_server',
+				wpnonce: wpdf_security_nonce.security,
+				images: all_images,
+				post_id: cur_post_id,
+				filename: wpdf_filename_template,
+				keyword: keyword				
+			};
+
+			jQuery.ajax ({
+				type: 'POST',
+				url: ajaxurl,
+				data: data,
+				dataType: 'json',
+				success: function(response) {
+					if(response.error != undefined && response.error != "") {
+						wpdf_set_message(response.error, 1, 0, loader);
+					} else {
+						if(response.result != "" && response.result != undefined) {
+							var o = 0;
+							jQuery("input:checkbox[name=wpdf_select_item]:checked").each(function() {
+								var item = jQuery(this).parent().parent().attr('id');	
+								imgurl = response.result[o];
+								o = o + 1;
+								
+								var attrcontent = wpdf_parse_attribution(item);
+								var addcontent = wpdf_parse_template(item, imgsize, imgurl, orientation);
+								imgcontent += addcontent;	
+
+								var owner_name = jQuery('#' + item).find(".wpdf_result_item_save .name").text(); 
+								var owner_link = jQuery('#' + item).find(".wpdf_result_item_save .link").text(); 			
+										
+								attrcontentall += '<a href="' + owner_link + '">' + owner_name + '</a>, ';							
+							});	
+							
+							var attr = wpdf_parse_attribution_multi(attrcontentall);
+							
+							wpdf_parse_content(imgcontent, attr, 0);
+							
+							wpdf_set_message("<strong>Selected images have been inserted into the editor.</strong>", 0, 0, loader);								
+						} else {
+							wpdf_set_message("Error saving images to server:", 1, 0, loader);
+						}
+					}
+				}
+			});					
+
+		} else {
+			var loader = 0;
+			
+			jQuery("input:checkbox[name=wpdf_select_item]:checked").each(function() {
+
+				var item = jQuery(this).parent().parent().attr('id');
+				
+				var attrcontent = wpdf_parse_attribution(item);
+				var addcontent = wpdf_parse_template(item, imgsize, "", orientation);
+				imgcontent += addcontent;			
+
+				var owner_name = jQuery('#' + item).find(".wpdf_result_item_save .name").text(); 
+				var owner_link = jQuery('#' + item).find(".wpdf_result_item_save .link").text(); 			
+						
+				attrcontentall += '<a href="' + owner_link + '">' + owner_name + '</a>, ';
+			});	
+
+			var attr = wpdf_parse_attribution_multi(attrcontentall);
+			
+			wpdf_parse_content(imgcontent, attr, 0);
+			
+			wpdf_set_message("<strong>Selected images have been inserted into the editor.</strong>", 0, 0, loader);			
+		}
 	});				
 	
 	jQuery('a.wpdf_set_featured').live("click", function(e) {

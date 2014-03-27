@@ -354,7 +354,7 @@ class wpdf_API_request {
 			if(strpos($template, "[".$stag) === false) {continue;}
 		
 			preg_match('#\['.$stag.':'.$subselector.'\](.*)\[/'.$stag.':'.$subselector.'\]#smiU', $template, $matches);
-			if ($matches[0] != false) {
+			if (is_array($matches) && $matches[0] != false) {
 				$template = $this->parse_special_tag($stag, $template, $matches, $value, $options, $depth, $subselector);
 			} else {
 				$template = str_replace(array('['.$stag.':'.$subselector.']','[/'.$stag.':'.$subselector.']'), "", $template);		

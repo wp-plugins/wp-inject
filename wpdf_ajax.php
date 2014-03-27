@@ -139,38 +139,15 @@ function wpdf_editor_ajax_save_to_server_function() {
 	}	
 }
 */
-function wpdf_save_image_function() {
+function wpdf_save_image($url, $post_id, $thumb = 0, $filename = "", $keyword = "") {
 
-	$url = $_POST["src"];
-	$post_id = $_POST["post_id"];
-	$thumb = $_POST["feat_img"];
-	$filename = $_POST["filename"];
-	$keyword = $_POST["keyword"];
-	
-	$nonce = $_POST["wpnonce"];
-	if (!wp_verify_nonce($nonce, 'wpdf_security_nonce')) {
-		echo json_encode(array("error" => "Invalid request."));
-		exit;
-	}		
-	
-	if(empty($url)) {
-		echo json_encode(array("error" => "No image source found."));
-		exit;	
-	}
-	
-	if(empty($post_id)) {
-		echo json_encode(array("error" => "No post found. This feature requires that an auto-save or draft of the current post was saved first."));
-		exit;	
-	}
-	
     require_once( ABSPATH . 'wp-admin/includes/file.php' );
     $tmp = download_url( $url );  // Download file to temp location, returns full server path to temp file, ex; /home/user/public_html/mysite/wp-content/26192277_640.tmp
 
     if ( is_wp_error( $tmp ) ) {
         @unlink($file_array['tmp_name']);   // clean up
         $file_array['tmp_name'] = '';
-		echo json_encode(array("error" => $tmp));
-		exit;			
+		return array("error" => $tmp);		
     }
 
     preg_match('/[^\?]+\.(jpg|JPG|jpe|JPE|jpeg|JPEG|gif|GIF|png|PNG)/', $url, $matches);    // fix file filename for query strings
@@ -212,8 +189,7 @@ function wpdf_save_image_function() {
 
     if ( is_wp_error($att_id) ) {
         @unlink($file_array['tmp_name']);   // clean up
-		echo json_encode(array("error" => $att_id));
-		exit;				
+		return array("error" => $att_id);		
     }
 
     if ($thumb) {
@@ -221,7 +197,93 @@ function wpdf_save_image_function() {
     }
 	
 	$newsrc = wp_get_attachment_image_src( $att_id, "full" );
-	echo json_encode(array("result" => $newsrc[0]));
-	exit;		
+	
+	if(is_array($newsrc) && !empty($newsrc[0])) {
+		return $newsrc[0];
+	} else {
+		return array("error" => "Image could not be saved to server.");		
+	}
+}
+
+function wpdf_save_image_function() {
+
+	$url = $_POST["src"];
+	$post_id = $_POST["post_id"];
+	$thumb = $_POST["feat_img"];
+	$filename = $_POST["filename"];
+	$keyword = $_POST["keyword"];
+	
+	$nonce = $_POST["wpnonce"];
+	if (!wp_verify_nonce($nonce, 'wpdf_security_nonce')) {
+		echo json_encode(array("error" => "Invalid request."));
+		exit;
+	}		
+	
+	if(empty($url)) {
+		echo json_encode(array("error" => "No image source found."));
+		exit;	
+	}
+	
+	if(empty($post_id)) {
+		echo json_encode(array("error" => "No post found. This feature requires that an auto-save or draft of the current post was saved first."));
+		exit;	
+	}
+	
+	$newsrc = wpdf_save_image($url, $post_id, $thumb, $filename, $keyword);
+
+	if(is_array($newsrc)) {
+		echo json_encode(array("error" => $newsrc["error"]));
+		exit;		
+	} else {
+		echo json_encode(array("result" => $newsrc));
+		exit;	
+	}
+}
+
+function wpdf_save_multiple_images_function() {
+
+	$images = $_POST["images"];
+	$post_id = $_POST["post_id"];
+	$thumb = $_POST["feat_img"];
+	$filename = $_POST["filename"];
+	$keyword = $_POST["keyword"];
+	
+	$nonce = $_POST["wpnonce"];
+	if (!wp_verify_nonce($nonce, 'wpdf_security_nonce')) {
+		echo json_encode(array("error" => "Invalid request."));
+		exit;
+	}		
+	
+	if(empty($images)) {
+		echo json_encode(array("error" => "No image source found."));
+		exit;	
+	}
+	
+	if(empty($post_id)) {
+		echo json_encode(array("error" => "No post found. This feature requires that an auto-save or draft of the current post was saved first."));
+		exit;	
+	}
+	
+	$newimages = array();
+
+	foreach($images as $url) {
+	
+		$newsrc = wpdf_save_image($url, $post_id, $thumb, $filename, $keyword);
+
+		if(is_array($newsrc)) {
+			echo json_encode(array("error" => $newsrc["error"]));
+			exit;		
+		} else {
+			$newimages[] = $newsrc;
+		}	
+	}
+	
+	if(empty($newimages)) {
+		echo json_encode(array("error" => "Images could not be saved to the server."));
+		exit;		
+	} else {
+		echo json_encode(array("result" => $newimages));
+		exit;	
+	}		
 }
 ?>

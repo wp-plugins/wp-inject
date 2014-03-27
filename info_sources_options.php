@@ -49,12 +49,12 @@ $modulearray = array(
 		"enabled" => 2,
 		"name" => "General Settings",
 		"options" => array(
-			"save_images" => array("value" => 1, "name" => "Save Images to Server", "type" => "checkbox", "info" => "Yes (Please note: Only single images get saved currently. Support for multi-image insertion will be added soon.)"),	
+			"save_images" => array("value" => 1, "name" => "Save Images to Server", "type" => "checkbox", "info" => "Yes"),	
 			"feat_img_size" => array("value" => "medium", "name" => "Featured Image Size", "type" => "select", "values" => array("square" => "Square (150px)", "small" => "Small (240px)", "medium" => "Medium (500px)", "large" => "Large (1024px)")),									
 			"default_align" => array("value" => "none", "name" => "Default Image Alignment", "type" => "select", "values" => array("none" => "None", "left" => "Left", "right" => "Right", "center" => "Center")),						
 			"attr_location" => array("value" => "bottom", "name" => "Attribution Location", "type" => "select", "values" => array("bottom" => "Bottom of Post", "image" => "Next to the Image")),						
 			"items_per_req" => array("value" => "40", "name" => "Results per Search", "type" => "select", "values" => array("20" => "20", "30" => "30", "40" => "40", "50" => "50", "60" => "60", "80" => "80", "100" => "100")),									
-			"wpi_attr" => array("value" => 0, "name" => "Enable WP Inject Link", "type" => "checkbox", "info" => "Yes (adds an unobtrusive link to wpinject.com inside the image attribution. If you do not use this please share WP Inject in another way, e.g. via social media or by blogging about it. Thanks!)"),	
+			"wpi_attr" => array("value" => 1, "name" => "Enable WP Inject Link", "type" => "checkbox", "info" => "Yes (adds an unobtrusive link to wpinject.com inside the image attribution. If you do not use this please share WP Inject in another way, e.g. via social media or by blogging about it. Thanks!)"),	
 		)
 	),	
 	"advanced" => array(

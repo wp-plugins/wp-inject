@@ -2,7 +2,7 @@
 Contributors: thoefter
 Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo
 Tested up to: 3.8.1
-Stable tag: 0.41
+Stable tag: 0.50
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,10 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 
 == Changelog ==  
+
+= 0.50 =
+- Adds support to save multiple images to your media libary with one click
+- Adds WP multisite support: You can now use "network activate" to activate WP Inject on all your blogs at the same time
 
 = 0.41 =
 - Fixes a bug that prevented one of the "Save Settings" buttons on the options page from working.

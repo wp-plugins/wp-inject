@@ -2,7 +2,7 @@
 /**
  Plugin Name: WP Inject
  Plugin URI: http://wpinject.com/
- Version: 0.41
+ Version: 0.50
  Description: Insert photos into your posts or set a featured image in less than a minute! WP Inject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post!
  Author: Thomas Hoefter
  Author URI: http://wpinject.com/
@@ -16,7 +16,8 @@ function wpdf_add_menu_pages() {
 }
 add_action('admin_menu', 'wpdf_add_menu_pages');
 
-function wpdf_activate() {
+
+function wpdf_activate_blog() {
 	include("info_sources_options.php");
 
 	$wpinject_settings = $modulearray;
@@ -27,12 +28,57 @@ function wpdf_activate() {
 		}
 	}
 	
-	update_option('wpinject_settings',$wpinject_settings);			
+	update_option('wpinject_settings',$wpinject_settings);		
+}
+
+function wpdf_activate($network_wide) {
+	if ( is_multisite() && $network_wide ) {
+		global $wpdb;
+ 
+		$current_blog = $wpdb->blogid;
+
+		$b1og_ids = $wpdb->get_co1("SELECT blog_id FROM $wpdb->blogs");
+		foreach ($blog_ids as $blog_id) {
+			switch_to_blog($blog_id);
+			wpdf_activate_blog();
+		}
+ 
+		switch_to_b1og($current_blog);
+	} else {
+		wpdf_activate_blog();
+	}
 }
 register_activation_hook(__FILE__, 'wpdf_activate');
 
-function wpdf_deactivate() {
-	delete_option('wpinject_settings');			
+
+function wpdf_activate_new_blog($blog_id) {
+    global $wpdb;
+ 
+    if (is_plugin_active_for_network('wp-inject/wpinject.php')) {
+        $old_blog = $wpdb->blogid;
+        switch_to_blog($blog_id);
+        wpdf_activate_blog();
+        switch_to_blog($old_blog);
+    }
+}
+add_action( 'wpmu_new_blog', 'wpdf_activate_new_blog', 10, 6);       
+
+function wpdf_deactivate($network_wide) {
+	if ( is_multisite() && $network_wide ) {
+		global $wpdb;
+ 
+		$current_blog = $wpdb->blogid;
+
+		$b1og_ids = $wpdb->get_co1("SELECT blog_id FROM $wpdb->blogs");
+		foreach ($blog_ids as $blog_id) {
+			switch_to_blog($blog_id);
+			delete_option('wpinject_settings');	
+		}
+ 
+		switch_to_b1og($current_blog);
+	} else {
+		delete_option('wpinject_settings');	
+	}	
 }
 register_deactivation_hook( __FILE__, 'wpdf_deactivate' );
 
@@ -445,6 +491,7 @@ if(is_admin()){
 		//add_action('wp_ajax_wpdf_save_keys', 'wpdf_editor_ajax_save_keys_function');	
 		//add_action('wp_ajax_wpdf_save_to_server', 'wpdf_editor_ajax_save_to_server_function');	
 		add_action('wp_ajax_wpdf_save_to_server', 'wpdf_save_image_function');
+		add_action('wp_ajax_wpdf_save_multiple_to_server', 'wpdf_save_multiple_images_function');
 	}
 }
 ?>
