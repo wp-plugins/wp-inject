@@ -41,6 +41,10 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 == Changelog ==  
 
+= 0.51 =
+- Fixes a bug that caused a fatal error on network activation on WP multisites.
+- Fixes a minor bug with attribution links.
+
 = 0.50 =
 - Adds support to save multiple images to your media libary with one click
 - Adds WP multisite support: You can now use "network activate" to activate WP Inject on all your blogs at the same time

@@ -84,9 +84,9 @@ function wpdf_parse_attribution_multi(content) {
 
 	if(wpdf_wpi_attr == "1") {	
 		if (template.indexOf('Photos') > -1) {
-			template = template.replace('Photos', '<a style="text-decoration: none;" href="http://wpinject.com/" title="Free WordPress insert photos plugin">Photos</a>');
+			template = template.replace('Photos', '<a style="text-decoration: none;" href="http://wpinject.com/" title="Photo inserted by the WP Inject WordPress plugin">Photos</a>');
 		} else {
-			template = template + '<small> via <a style="text-decoration: none;" href="http://wpinject.com/" title="Free WordPress insert photos plugin">WP Inject</a></small>';
+			template = template + '<small> via <a style="text-decoration: none;" href="http://wpinject.com/" title="Free WordPress plugin to insert images into posts">WP Inject</a></small>';
 		}		
 	}
 	return template;
@@ -140,7 +140,7 @@ function wpdf_parse_attribution(item) {
 	template = template.replace('{license_link}', license_link);
 	
 	if(wpdf_wpi_attr == "1") {
-		template = template.replace('Photo', '<a style="text-decoration: none;" href="http://wpinject.com/" title="Insert images into WordPress blog posts">Photo</a>');
+		template = template.replace('Photo', '<a rel="nofollow" style="text-decoration: none;" href="http://wpinject.com/" title="Image inserted by the WP Inject WordPress plugin">Photo</a>');
 	}
 
 	return template;

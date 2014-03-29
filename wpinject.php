@@ -2,7 +2,7 @@
 /**
  Plugin Name: WP Inject
  Plugin URI: http://wpinject.com/
- Version: 0.50
+ Version: 0.51
  Description: Insert photos into your posts or set a featured image in less than a minute! WP Inject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post!
  Author: Thomas Hoefter
  Author URI: http://wpinject.com/
@@ -37,13 +37,13 @@ function wpdf_activate($network_wide) {
  
 		$current_blog = $wpdb->blogid;
 
-		$b1og_ids = $wpdb->get_co1("SELECT blog_id FROM $wpdb->blogs");
+		$blog_ids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
 		foreach ($blog_ids as $blog_id) {
 			switch_to_blog($blog_id);
 			wpdf_activate_blog();
 		}
  
-		switch_to_b1og($current_blog);
+		switch_to_blog($current_blog);
 	} else {
 		wpdf_activate_blog();
 	}
@@ -69,13 +69,13 @@ function wpdf_deactivate($network_wide) {
  
 		$current_blog = $wpdb->blogid;
 
-		$b1og_ids = $wpdb->get_co1("SELECT blog_id FROM $wpdb->blogs");
+		$blog_ids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
 		foreach ($blog_ids as $blog_id) {
 			switch_to_blog($blog_id);
 			delete_option('wpinject_settings');	
 		}
  
-		switch_to_b1og($current_blog);
+		switch_to_blog($current_blog);
 	} else {
 		delete_option('wpinject_settings');	
 	}	
@@ -478,18 +478,15 @@ function wpdf_editor_scripts() {
 }
 
 if(is_admin()){
-    if(in_array($GLOBALS['pagenow'], array('post.php', 'post-new.php'))){
+	global $pagenow;
+	if($pagenow == 'post.php' || $pagenow == 'post-new.php'){
 		add_action('admin_head', 'wpdf_editor_head');		
 		add_action('admin_enqueue_scripts', 'wpdf_editor_scripts');
-    }
-	
-	global $pagenow;
+	}
+
 	if($pagenow == 'admin-ajax.php'){
 		require_once('wpdf_ajax.php');
 		add_action('wp_ajax_wpdf_editor', 'wpdf_editor_ajax_action_function');
-		//add_action('wp_ajax_wpdf_set_featured', 'wpdf_editor_ajax_set_featured_function');	
-		//add_action('wp_ajax_wpdf_save_keys', 'wpdf_editor_ajax_save_keys_function');	
-		//add_action('wp_ajax_wpdf_save_to_server', 'wpdf_editor_ajax_save_to_server_function');	
 		add_action('wp_ajax_wpdf_save_to_server', 'wpdf_save_image_function');
 		add_action('wp_ajax_wpdf_save_multiple_to_server', 'wpdf_save_multiple_images_function');
 	}
