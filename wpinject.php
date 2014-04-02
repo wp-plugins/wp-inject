@@ -2,7 +2,7 @@
 /**
  Plugin Name: WP Inject
  Plugin URI: http://wpinject.com/
- Version: 0.51
+ Version: 0.52
  Description: Insert photos into your posts or set a featured image in less than a minute! WP Inject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post!
  Author: Thomas Hoefter
  Author URI: http://wpinject.com/
@@ -345,13 +345,16 @@ function wpdf_editor_metabox_content($post) {
 	$moduleactive = 0;$modulecontent = "";
 	if(is_array($options)) {
 		foreach($options as $module => $moduledata) {
-			if($moduledata["enabled"] != 2) {
+			if($moduledata["enabled"] != 2 && $module != "general" && $module != "advanced") {
 				if(!empty($moduledata["options"]["appid"]["value"])) {$moduleactive = 1;}
 				$modulecontent .= '<span id="'.$module .'-load" style="display: none;">
 				<img src="'.WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)).'/images/ajax-loader.gif" style="width: 16px; height: 16px;margin-bottom: -2px;" /></span>
 				<input style="margin-right: 10px;" type="button" class="button wpdf-module" id="'.$module .'" value="Search">';
 			}
 		}
+	} else {
+		$moduleactive = -1;
+		echo "Error: Options for WP Inject not found. Please try de- and reactivating the plugin.";
 	}
 	
 	if($moduleactive == 0) {
@@ -366,7 +369,7 @@ function wpdf_editor_metabox_content($post) {
 	}
 	?>
 	
-	<div id="wpdf_main" <?php if($moduleactive == 0) { echo 'style="display:none;"';} ?>>
+	<div id="wpdf_main" <?php if($moduleactive == 0 || $moduleactive == -1) { echo 'style="display:none;"';} ?>>
 	
 		<div id="wpdf_modules">
 			<div>

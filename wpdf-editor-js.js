@@ -30,7 +30,10 @@ function wpdf_set_message(message, error, show_load, replace_load) {
 		jQuery('#wpdf_message_box #wpdf_m' + randomnumber).slideDown(400);
 	} else {
 		var randomnumber = replace_load;
-		if(error == 1) {jQuery('#wpdf_message_box #wpdf_m' + randomnumber).switchClass("wpdf_msg", "wpdf_error");}
+		if(error == 1) {
+			jQuery('#wpdf_message_box #wpdf_m' + randomnumber).removeClass("wpdf_msg");
+			jQuery('#wpdf_message_box #wpdf_m' + randomnumber).addClass("wpdf_error");
+		}
 		jQuery('#wpdf_message_box #wpdf_m' + randomnumber).html(message);	
 	}
 	if(show_load == 0) {
@@ -455,7 +458,6 @@ jQuery(document).ready(function($) {
 		if(wpdf_save_images == 1) {
 		
 			var imgurl = jQuery('#' + item).find(".wpdf_result_item_save .img").text(); 
-
 			imgurl = wpdf_get_image_size_url(imgurl, imgsize);
 
 			var data = {
@@ -466,7 +468,7 @@ jQuery(document).ready(function($) {
 				filename: wpdf_filename_template,
 				keyword: keyword				
 			};
-				
+
 			jQuery.ajax ({
 				type: 'POST',
 				url: ajaxurl,

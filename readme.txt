@@ -2,7 +2,7 @@
 Contributors: thoefter
 Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo
 Tested up to: 3.8.1
-Stable tag: 0.51
+Stable tag: 0.52
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,11 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 
 == Changelog ==  
+
+= 0.52 =
+- Improved error reporting for if the upload of images to the server fails.
+- Fallback function used if image upload fails.
+- Fixes a bug preventing the saving of photos for certain users.
 
 = 0.51 =
 - Fixes a bug that caused a fatal error on network activation on WP multisites.

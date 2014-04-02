@@ -103,51 +103,42 @@ function wpdf_editor_ajax_save_keys_function() {
 	echo json_encode(array("success" => "true"));
 	exit;	
 }
+*/
 
-function wpdf_editor_ajax_save_to_server_function() {
-
-	$src = $_POST["src"];
-	$post_id = $_POST["post_id"];
-
-	$nonce = $_POST["wpnonce"];
-	if (!wp_verify_nonce($nonce, 'wpdf_security_nonce')) {
-		echo json_encode(array("error" => "Invalid request."));
-		exit;
-	}	
-
-	if(empty($src)) {
-		echo json_encode(array("error" => "No image source found."));
-		exit;	
-	}
-	
-	if(empty($post_id)) {
-		echo json_encode(array("error" => "No post found. This feature requires that an auto-save or draft of the current post was saved first."));
-		exit;	
-	}
+function wpdf_save_image_alt($src, $post_id, $thumb) {
 
 	$result = media_sideload_image($src, $post_id);
 	$attachments = get_posts(array('numberposts' => '1', 'post_parent' => $post_id, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'post_date', 'order' => 'DESC'));
 
-	$newsrc = wp_get_attachment_image_src( $attachments[0]->ID, "full" );
+	if(sizeof($attachments) > 0 && $thumb){
+		set_post_thumbnail($post_id, $attachments[0]->ID);	
+	}	
 	
-	if(empty($newsrc)) {
-		echo json_encode(array("error" => "Image could not be saved."));
-		exit;	
+	$newsrc = wp_get_attachment_image_src( $attachments[0]->ID, "full" );
+
+	if(is_array($newsrc) && !empty($newsrc[0])) {
+		return $newsrc[0];
 	} else {
-		echo json_encode(array("result" => $newsrc[0]));
-		exit;		
+		return false;	
 	}	
 }
-*/
+
 function wpdf_save_image($url, $post_id, $thumb = 0, $filename = "", $keyword = "") {
 
     require_once( ABSPATH . 'wp-admin/includes/file.php' );
     $tmp = download_url( $url );  // Download file to temp location, returns full server path to temp file, ex; /home/user/public_html/mysite/wp-content/26192277_640.tmp
 
     if ( is_wp_error( $tmp ) ) {
-        @unlink($file_array['tmp_name']);   // clean up
-        $file_array['tmp_name'] = '';
-		return array("error" => $tmp);		
+		@unlink($file_array['tmp_name']);   // clean up
+		$file_array['tmp_name'] = '';	
+		
+		$retry = wpdf_save_image_alt($url, $post_id, $thumb);
+		if($retry == false) {
+			$error_string = $tmp->get_error_message();
+			return array("error" => $error_string);	
+		} else {
+			return $newsrc;
+		}
     }
 
     preg_match('/[^\?]+\.(jpg|JPG|jpe|JPE|jpeg|JPEG|gif|GIF|png|PNG)/', $url, $matches);    // fix file filename for query strings
@@ -188,8 +179,9 @@ function wpdf_save_image($url, $post_id, $thumb = 0, $filename = "", $keyword = 
     $att_id = media_handle_sideload( $file_array, $post_id, null, $post_data );             // $post_data can override the items saved to wp_posts table, like post_mime_type, guid, post_parent, post_title, post_content, post_status
 
     if ( is_wp_error($att_id) ) {
+		$error_string = $att_id->get_error_message();
         @unlink($file_array['tmp_name']);   // clean up
-		return array("error" => $att_id);		
+		return array("error" => $error_string);		
     }
 
     if ($thumb) {
@@ -198,7 +190,10 @@ function wpdf_save_image($url, $post_id, $thumb = 0, $filename = "", $keyword = 
 	
 	$newsrc = wp_get_attachment_image_src( $att_id, "full" );
 	
-	if(is_array($newsrc) && !empty($newsrc[0])) {
+	if ( is_wp_error($newsrc) ) {
+		$error_string = $newsrc->get_error_message();
+		return array("error" => $error_string);		
+	} elseif(is_array($newsrc) && !empty($newsrc[0])) {
 		return $newsrc[0];
 	} else {
 		return array("error" => "Image could not be saved to server.");		
@@ -228,7 +223,7 @@ function wpdf_save_image_function() {
 		echo json_encode(array("error" => "No post found. This feature requires that an auto-save or draft of the current post was saved first."));
 		exit;	
 	}
-	
+
 	$newsrc = wpdf_save_image($url, $post_id, $thumb, $filename, $keyword);
 
 	if(is_array($newsrc)) {
