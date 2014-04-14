@@ -559,7 +559,10 @@ jQuery(document).ready(function($) {
 						var imgurl_m = imgurl.replace('_m.jpg','.jpg');	
 						
 						var img_link = elem.find('.link').text();
-						
+						var title = elem.find('.title').text();
+						var datetaken = elem.find('.date').text();
+						var owner = elem.find('.name').text();
+
 						var sizelink = "";						
 						elem.find('.sizes div').each(function () {
 							var size_text = jQuery(this).html();
@@ -570,7 +573,7 @@ jQuery(document).ready(function($) {
 							
 						sizelink += '<a title="Click to set featured image" class="wpdf_set_featured" href="#" >Featured Image</a>';
 
-						clone.find(".wpdf_result_item_content").html('<img class="wpdf_thumb" src="'+ imgurl_s +'" /><div class="wpdf_big_container"><div class="wpdf_bigger"><div class="wpdf_insert_links">' + sizelink + '</div><a href="' + img_link + '" target="_blank"><img class="wpdf_bigger_img" src="'+ imgurl_m +'" /></a></div></div>');
+						clone.find(".wpdf_result_item_content").html('<img class="wpdf_thumb" src="'+ imgurl_s +'" /><div class="wpdf_big_container"><div class="wpdf_bigger"><div class="wpdf_insert_links">' + sizelink + '</div><a href="' + img_link + '" target="_blank"><img class="wpdf_bigger_img" src="'+ imgurl_m +'" /></a><br/><small><em>' + title + '</em> by <a href="' + img_link + '" target="_blank">' + owner + '</a> on ' + datetaken + '</small></div></div>');
 						
 						clone.find(".wpdf_select_item_o").attr('name', "wpdf_select_item");
 						clone.find(".wpdf_select_item_o").attr('id', "wpdf_select_" + result_num);							

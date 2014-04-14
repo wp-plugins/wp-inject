@@ -2,7 +2,7 @@
 Contributors: thoefter
 Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo
 Tested up to: 3.8.1
-Stable tag: 0.52
+Stable tag: 0.53
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,11 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 
 == Changelog ==  
+
+= 0.53 =
+- Adds possibility to get more than 100 images per search to the Settings page
+- Adds image title, author and date below previews of photos
+- Fixes a small bug that could cause image uploads to fail.
 
 = 0.52 =
 - Improved error reporting for if the upload of images to the server fails.
