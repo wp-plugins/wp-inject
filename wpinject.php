@@ -2,7 +2,7 @@
 /**
  Plugin Name: WP Inject
  Plugin URI: http://wpinject.com/
- Version: 0.53
+ Version: 1.00
  Description: Insert photos into your posts or set a featured image in less than a minute! WP Inject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post!
  Author: Thomas Hoefter
  Author URI: http://wpinject.com/
@@ -125,7 +125,7 @@ function wpdf_settings_page() {
 	if($_GET["test"] == 1) {	
 		@require_once("api.class.php");	
 		$api = new wpdf_API_request;
-		$result = $api->api_content_bulk("fun", array("flickr" => array("count" => 5, "start" => 1))); 
+		$result = $api->api_content_bulk("fun", array("pixabay" => array("count" => 5, "start" => 1))); 
 		print_r($result);
 	}
 	
@@ -339,17 +339,28 @@ function wpdf_editor_metabox() {
 }
 
 function wpdf_editor_metabox_content($post) {
+	global $modulearray;
+
+	$optionsa = $modulearray;
 
 	$options = get_option("wpinject_settings");
 
 	$moduleactive = 0;$modulecontent = "";
 	if(is_array($options)) {
-		foreach($options as $module => $moduledata) {
+		foreach($optionsa as $module => $moduledata) {
+			if(!empty($options[$module])) {
+				$moduledata = $options[$module];
+			}
 			if($moduledata["enabled"] != 2 && $module != "general" && $module != "advanced") {
 				if(!empty($moduledata["options"]["appid"]["value"])) {$moduleactive = 1;}
-				$modulecontent .= '<span id="'.$module .'-load" style="display: none;">
-				<img src="'.WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)).'/images/ajax-loader.gif" style="width: 16px; height: 16px;margin-bottom: -2px;" /></span>
-				<input style="margin-right: 10px;" type="button" class="button wpdf-module" id="'.$module .'" value="Search">';
+
+				if(empty($moduledata["options"]["appid"]["value"])) {
+					$modulecontent .= '<label for="module-'.$module.'"><input type="checkbox" id="module-'.$module.'" name="modules[]" value="'.$module.'" disabled> <a href="options-general.php?page=wpdf-options" title="Clcik to go the the settings page and activate this module.">'.$moduledata["name"].'</a></label><br/>';
+				} elseif($moduledata["enabled"] == 1) {
+					$modulecontent .= '<label for="module-'.$module.'"><input type="checkbox" id="module-'.$module.'" name="modules[]" value="'.$module.'" checked> '.$moduledata["name"].'</label><br/>';
+				} else {
+					$modulecontent .= '<label for="module-'.$module.'"><input type="checkbox" id="module-'.$module.'" name="modules[]" value="'.$module.'"> '.$moduledata["name"].'</label><br/>';
+				}
 			}
 		}
 	} else {
@@ -374,8 +385,18 @@ function wpdf_editor_metabox_content($post) {
 		<div id="wpdf_modules">
 			<div>
 				<input placeholder="<?php _e("Enter search keyword","wpinject") ?>" type="text" value="" size="30" class="newtag form-input-tip" name="wpdf_keyword" id="wpdf_keyword">
-				<?php echo $modulecontent; ?>
-				
+
+				<div class="wpdf_search_item_content">
+					<a style="margin-right: 10px;" type="button" class="button wpdf-module" id="wpdf-searchbutton">Search</a>
+					
+					<div class="wpdf_big_container">
+						<div class="wpdf_searchwhat">
+							<p><?php echo $modulecontent; ?></p>
+						</div>
+					</div>
+
+				</div>				
+
 				<a href="#" id="wpdf_get_title"><?php _e("&rarr; Copy Title","wpinject") ?></a>
 				<?php if(function_exists("wpseo_init")) { ?>
 					<a href="#" id="wpdf_get_seo_keyword"><?php _e("&rarr; Copy SEO Keyword","wpinject") ?></a>

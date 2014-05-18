@@ -19,6 +19,26 @@ $source_infos = array(
 				"description" => "description", 
 				)
 		),
+		
+		"pixabay" => array(
+			"request" => 'http://pixabay.com/api/?username={username}&key={appid}&search_term={keyword}&image_type={image_type}',	
+			"limits" => array("request" => 100, "total" => 1000),		
+			"title" => "tags",		
+			"unique" => "id",	
+			"error" => "error",
+			"level1" => "hits",
+			"json" => 1,
+			"selector" => "node",		
+			"categories" => array("media"), 
+			"icon" => "", 
+			"signup" => "http://pixabay.com",
+			"tags" => array(
+				"author" => "user", 
+				"date" => "datetaken", 
+				"description" => "description", 
+				)
+		),		
+		
 	),		
 );
 
@@ -45,6 +65,32 @@ $modulearray = array(
 			)		
 		)
 	),
+	"pixabay" => array(
+		"enabled" => 1,
+		"name" => "Pixabay",
+		"options" => array(
+			"appid" => array("value" => "", "name" => "API Key", "type" => "text", "verified" => 0, "signup" => ''),	
+			"username" => array("value" => "", "name" => "Username", "type" => "text"),	
+			"image_type" => array("value" => "all", "name" => "Image Types", "type" => "select", "values" => array("all" => "All", "photo" => "Photos", "vector" => "Vector","clipart" => "Clipart")),								
+		),	
+		"templates" => array(
+			"default" => array(
+				"name" => "Medium Image",
+				"content" => '
+				<div class="owner">{user}</div>
+				<div class="title">{tags}</div>
+				<div class="sizes">
+					<div class="small"><strong>S</strong> {previewWidth} x {previewHeight}px</div>
+					<div class="medium"><strong>M</strong> {webformatWidth} x {webformatHeight}px</div>
+				</div>
+				<div class="name">{user}</div>
+				<div class="id">{id}</div>
+				<div class="img_small">{previewURL}</div>
+				<div class="img_medium">{webformatURL}</div>
+				<div class="link">{pageURL}</div>'
+			)		
+		)
+	),	
 	"general" => array(
 		"enabled" => 2,
 		"name" => "General Settings",

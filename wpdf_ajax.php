@@ -2,8 +2,8 @@
 
 function wpdf_editor_ajax_action_function() {
 
-	$module = $_POST["module"];
-	$modulerun = $_POST["modulerun"];
+	$modules = $_POST["modules"];
+
 	if(get_magic_quotes_gpc()) {
 		$keyword = stripslashes($_POST['keyword']);
 	} else {
@@ -16,7 +16,7 @@ function wpdf_editor_ajax_action_function() {
 		exit;
 	}	
 
-	if(empty($module)) {
+	if(empty($modules)) {
 		echo json_encode(array("error" => "No content source found."));
 		exit;	
 	}
@@ -33,18 +33,29 @@ function wpdf_editor_ajax_action_function() {
 	$items_per_req = $options["general"]["options"]["items_per_req"]["value"];
 	if(empty($items_per_req)) {$items_per_req = 30;}
 	
-	$start = 1 + (($modulerun - 1) * $items_per_req);
-	
-	$api = new wpdf_API_request;
-	$result = $api->api_content_bulk($keyword, array($module => array("count" => $items_per_req, "start" => $start))); 
+	$marray = array();
+	foreach($modules as $module) {
+		$mn = $module["name"];
+		$modulerun = $module["module_run"];
+		$start = 1 + (($modulerun - 1) * $items_per_req);
 
-	if(is_array($result) && !empty($result[$module]["error"])) {
-		echo json_encode(array("error" => $result[$module]["error"]));
-		exit;		
-	} else {
-		$result = $result[$module];
+		$marray[$mn] = array("count" => $items_per_req, "start" => $start);
+	}
+
+	$api = new wpdf_API_request;
+	//$result = $api->api_content_bulk($keyword, array($module => array("count" => $items_per_req, "start" => $start))); 
+	$result = $api->api_content_bulk($keyword, $marray); 
+	
+	if(is_array($result)) {
+		foreach($modules as $module) {
+			$mn = $module["name"];
+			$result[$mn]["modulerun"] = $module["module_run"];
+		}	
 		echo json_encode(array("result" => $result));
 		exit;	
+	} else {
+		echo json_encode(array("error" => "Content search failed"));
+		exit;		
 	}
 }
 /*

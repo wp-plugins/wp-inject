@@ -285,6 +285,8 @@ class wpdf_API_request {
 		$user_id = get_current_user_id();	
 		$sites = get_option("cmsc_sites_".$user_id);
 		
+		//echo $request . "<br>";
+		
 		if ( function_exists('curl_init') ) {
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Konqueror/4.0; Microsoft Windows) KHTML/4.0.80 (like Gecko)");
@@ -317,7 +319,6 @@ class wpdf_API_request {
 			if(empty($pxml)) {$return["error"] = "No content could be found.";return $return;}
 			$response = $xmlize->generateValidXmlFromObj($pxml);
 			$pxml = simplexml_load_string($response);	
-			
 		} else {
 			$pxml = simplexml_load_string($response);		
 		}		
