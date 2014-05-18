@@ -1,6 +1,6 @@
 ﻿=== WP Inject ===
 Contributors: thoefter
-Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo
+Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo, pixabay
 Tested up to: 3.8.1
 Stable tag: 1.0
 License: GPLv2 or later
@@ -18,6 +18,11 @@ Advanced users can head to the WP Inject settings page and fine tune the plugin.
 
 **Have a look at my [tutorial on how to install and use WP Inject](http://wpinject.com/tutorial/ "How to insert images with WP Inject") to get started with the plugin.** Besides explaining the basics the tutorial also contains details on all the available settings in WP Inject and how the plugin works together with WordPress SEO by Yoast. 
 
+= Supported Image Sources: =
+*  **Flickr** - Over 200 million creative commons images. Attribution is automatically added where required.
+*  **Pixabay** - More than 150,000 high quality public domain photos. No attribution required for any of them!
+*  More sources will be added in the future, including support for injecting videos, ads and other types of content!
+
 = Features: =
 *  Search thousands of creative commons photos and include any into your posts.
 *  Fast and easy: Inserting images takes 3 clicks and less than a minute!
@@ -33,8 +38,6 @@ Advanced users can head to the WP Inject settings page and fine tune the plugin.
 
 
 I will update WP Inject regularly. The first feature update was released only a week after the initial launch of WP Inject and more will certainly follow soon! 
-
-I plan to add more image sources besides Flickr to the plugin in the future and eventually make it possible to inject much more than just images with WP Inject, e.g. videos, ads, products and news stories. Stay tuned! 
 
 If you find any bugs please report them! General feedback or feature requests are also welcome. 
 
