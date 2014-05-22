@@ -2,7 +2,7 @@
 /**
  Plugin Name: WP Inject
  Plugin URI: http://wpinject.com/
- Version: 1.00
+ Version: 1.01
  Description: Insert photos into your posts or set a featured image in less than a minute! WP Inject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post!
  Author: Thomas Hoefter
  Author URI: http://wpinject.com/
@@ -352,9 +352,9 @@ function wpdf_editor_metabox_content($post) {
 				$moduledata = $options[$module];
 			}
 			if($moduledata["enabled"] != 2 && $module != "general" && $module != "advanced") {
-				if(!empty($moduledata["options"]["appid"]["value"])) {$moduleactive = 1;}
+				if(!empty($moduledata["options"]["appid"]["value"]) || $module == "pixabay") {$moduleactive = 1;}
 
-				if(empty($moduledata["options"]["appid"]["value"])) {
+				if(empty($moduledata["options"]["appid"]["value"]) && $module != "pixabay") {
 					$modulecontent .= '<label for="module-'.$module.'"><input type="checkbox" id="module-'.$module.'" name="modules[]" value="'.$module.'" disabled> <a href="options-general.php?page=wpdf-options" title="Clcik to go the the settings page and activate this module.">'.$moduledata["name"].'</a></label><br/>';
 				} elseif($moduledata["enabled"] == 1) {
 					$modulecontent .= '<label for="module-'.$module.'"><input type="checkbox" id="module-'.$module.'" name="modules[]" value="'.$module.'" checked> '.$moduledata["name"].'</label><br/>';

@@ -2,7 +2,7 @@
 Contributors: thoefter
 Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo, pixabay
 Tested up to: 3.8.1
-Stable tag: 1.0
+Stable tag: 1.01
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,8 +44,11 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 == Changelog ==  
 
+= 1.01 =
+- Pixabay does not require you to enter an API key and username anymore! You can now use Pixabay right away after installing WP Inject.
+
 = 1.00 =
-- Adds Pixabay as an additional image source, providing over 150,000 high quality photos for your posts. To use Pixabay you need to register for a free account at pixabay.com and enter your API details on the WP Inject "Settings" page.
+- Adds Pixabay as an additional image source, providing over 150,000 high quality photos for your posts. 
 
 = 0.53 =
 - Adds possibility to get more than 100 images per search to the Settings page

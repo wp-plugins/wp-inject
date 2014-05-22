@@ -21,7 +21,7 @@ $source_infos = array(
 		),
 		
 		"pixabay" => array(
-			"request" => 'http://pixabay.com/api/?username={username}&key={appid}&search_term={keyword}&image_type={image_type}',	
+			"request" => 'http://pixabay.com/api/?username=thoefter&key=47b0f746df60162dfc2c&search_term={keyword}&image_type={image_type}',	
 			"limits" => array("request" => 100, "total" => 1000),		
 			"title" => "tags",		
 			"unique" => "id",	
@@ -69,8 +69,8 @@ $modulearray = array(
 		"enabled" => 1,
 		"name" => "Pixabay",
 		"options" => array(
-			"appid" => array("value" => "", "name" => "API Key", "type" => "text", "verified" => 0, "signup" => ''),	
-			"username" => array("value" => "", "name" => "Username", "type" => "text"),	
+			//"appid" => array("value" => "", "name" => "API Key", "type" => "text", "verified" => 0, "signup" => ''),	
+			//"username" => array("value" => "", "name" => "Username", "type" => "text"),	
 			"image_type" => array("value" => "all", "name" => "Image Types", "type" => "select", "values" => array("all" => "All", "photo" => "Photos", "vector" => "Vector","clipart" => "Clipart")),								
 		),	
 		"templates" => array(
