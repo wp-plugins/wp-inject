@@ -30,9 +30,9 @@
 .wpdf_share_google:before {content: "\f462";}
 .wpdf_settings_link:before {content: "\f111";}
 
-#wpdf_settings_box {float: right; width: 250px;background-color: #fff;padding: 10px;}
+.wpdf_settings_box {float: right; width: 250px;background-color: #fff;padding: 10px;}
 
-#wpdf_message_box .wpdf_error, #wpdf_message_box .wpdf_msg, #wpdf_share_box, #wpdf_settings_box  {	
+#wpdf_message_box .wpdf_error, #wpdf_message_box .wpdf_msg, #wpdf_share_box, .wpdf_settings_box  {	
 	margin: 10px 0;
 	border: 1px solid #EAEAEA;	
 	-webkit-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.24);

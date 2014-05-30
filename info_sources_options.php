@@ -2,7 +2,7 @@
 $source_infos = array(
 	"sources" => array(			
 		"flickr" => array(
-			"request" => 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={appid}&text={keyword}&sort={sort}&content_type={cont}&license={license}&extras=date_taken%2C+license%2C+owner_name%2C+url_sq%2C+url_t%2C+url_s%2C+url_m%2C+url_l%2C+url_o%2C+url_q%2C+description&per_page={num}&page={start}',	
+			"request" => 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={appid}&text={keyword}&sort={sort}&content_type=&license={license}&extras=date_taken%2C+license%2C+owner_name%2C+url_sq%2C+url_t%2C+url_s%2C+url_m%2C+url_l%2C+url_o%2C+url_q%2C+description&per_page={num}&page={start}',	
 			//"request" => 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={appid}&text={keyword}&sort={sort}&content_type={cont}&license={license}&extras=date_taken%2C+owner_name%2C+icon_server%2C+geo%2C+tags%2C+machine_tags%2C+media%2C+path_alias%2C+url_q%2C+url_n%2C+url_c%2C+url_z%2C+url_sq%2C+url_t%2C+url_s%2C+url_m%2C+url_l%2C+url_o%2C+description&per_page={num}&page={start}',
 			"limits" => array("request" => 500, "total" => 4000),		
 			"title" => "title",		
@@ -17,11 +17,25 @@ $source_infos = array(
 				"author" => "ownername", 
 				"date" => "datetaken", 
 				"description" => "description", 
-				)
+				),
+			"templates" => array(
+				"default" => array(
+					"name" => "Medium Image",
+					"content" => '<div class="owner">{owner}</div><div class="title">{title}</div><div class="license">{license}</div>
+					<div class="sizes">
+					<div class="square"><strong>SQ</strong> {width_q} x {height_q}px</div>
+					<div class="small"><strong>S</strong> {width_s} x {height_s}px</div>
+					<div class="medium"><strong>M</strong> {width_m} x {height_m}px</div>
+					[IF:height_l]<div class="large"><strong>L</strong> {height_l} x {width_l}px</div>[/IF:height_l]
+					</div>
+					<div class="name">{ownername}</div><div class="id">{id}</div><div class="date">{datetaken}</div><div class="description">{description}</div><div class="img">{url_s}</div><div class="link">http://www.flickr.com/photos/{owner}/{id}</div>'
+				)		
+			)				
 		),
 		
 		"pixabay" => array(
-			"request" => 'http://pixabay.com/api/?username=thoefter&key=47b0f746df60162dfc2c&search_term={keyword}&image_type={image_type}',	
+			//"request" => 'http://pixabay.com/api/?username=thoefter&key=47b0f746df60162dfc2c&search_term={keyword}&image_type={image_type}',	
+			"request" => 'http://pixabay.com/api/?username=thoefter&key=47b0f746df60162dfc2c&search_term={keyword}&image_type={image_type}&response_group=high_resolution&per_page={num}&page={start}',			
 			"limits" => array("request" => 100, "total" => 1000),		
 			"title" => "tags",		
 			"unique" => "id",	
@@ -36,7 +50,26 @@ $source_infos = array(
 				"author" => "user", 
 				"date" => "datetaken", 
 				"description" => "description", 
-				)
+				),
+			"templates" => array(
+				"default" => array(
+					"name" => "Medium Image",
+					"content" => '
+					<div class="owner">{user}</div>
+					<div class="title">Photo</div>
+					<div class="sizes">
+						<div class="small"><strong>S</strong> {previewWidth} x {previewHeight}px</div>
+						<div class="medium"><strong>M</strong> {webformatWidth} x {webformatHeight}px</div>
+						<div class="large"><strong>L</strong> 1280px</div>
+					</div>
+					<div class="name">{user}</div>
+					<div class="id">{id}</div>
+					<div class="img_small">{previewURL}</div>
+					<div class="img_medium">{webformatURL}</div>
+					<div class="img_large">{largeImageURL}</div>
+					<div class="link">http://pixabay.com/en/users/{user}</div>'
+				)		
+			)				
 		),		
 		
 	),		
@@ -51,19 +84,6 @@ $modulearray = array(
 			"license" => array("value" => "4,5,6,7", "name" => "License", "type" => "select", "values" => array("1,2,3,4,5,6,7" => "Non-Commercial Use Only, Attribution Required", "4,5,6,7" => "Commercial Use Allowed, Attribution Required", "7" => "Commercial Use Allowed, No Attribution Required", "0,1,2,3,4,5,6,7" => "All Licenses (not recommended)")),					
 			"sort" => array("value" => "relevance", "name" => "Order Images By", "type" => "select", "values" => array("relevance" => "Relevance", "date-posted-asc" => "Date posted, ascending", "date-posted-desc" => "Date posted, descending","date-taken-asc" => "Date taken, ascending", "date-taken-desc" => "Date taken, descending", "interestingness-desc" => "Interestingness, descending", "interestingness-asc" => "Interestingness, ascending")),					
 		),	
-		"templates" => array(
-			"default" => array(
-				"name" => "Medium Image",
-				"content" => '<div class="owner">{owner}</div><div class="title">{title}</div><div class="license">{license}</div>
-				<div class="sizes">
-				<div class="square"><strong>SQ</strong> {width_q} x {height_q}px</div>
-				<div class="small"><strong>S</strong> {width_s} x {height_s}px</div>
-				<div class="medium"><strong>M</strong> {width_m} x {height_m}px</div>
-				[IF:height_l]<div class="large"><strong>L</strong> {height_l} x {width_l}px</div>[/IF:height_l]
-				</div>
-				<div class="name">{ownername}</div><div class="id">{id}</div><div class="date">{datetaken}</div><div class="description">{description}</div><div class="img">{url_s}</div><div class="link">http://www.flickr.com/photos/{owner}/{id}</div>'
-			)		
-		)
 	),
 	"pixabay" => array(
 		"enabled" => 1,
@@ -73,23 +93,7 @@ $modulearray = array(
 			//"username" => array("value" => "", "name" => "Username", "type" => "text"),	
 			"image_type" => array("value" => "all", "name" => "Image Types", "type" => "select", "values" => array("all" => "All", "photo" => "Photos", "vector" => "Vector","clipart" => "Clipart")),								
 		),	
-		"templates" => array(
-			"default" => array(
-				"name" => "Medium Image",
-				"content" => '
-				<div class="owner">{user}</div>
-				<div class="title">{tags}</div>
-				<div class="sizes">
-					<div class="small"><strong>S</strong> {previewWidth} x {previewHeight}px</div>
-					<div class="medium"><strong>M</strong> {webformatWidth} x {webformatHeight}px</div>
-				</div>
-				<div class="name">{user}</div>
-				<div class="id">{id}</div>
-				<div class="img_small">{previewURL}</div>
-				<div class="img_medium">{webformatURL}</div>
-				<div class="link">{pageURL}</div>'
-			)		
-		)
+
 	),	
 	"general" => array(
 		"enabled" => 2,

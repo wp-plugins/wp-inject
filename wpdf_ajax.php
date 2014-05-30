@@ -41,7 +41,7 @@ function wpdf_editor_ajax_action_function() {
 
 		$marray[$mn] = array("count" => $items_per_req, "start" => $start);
 	}
-
+	
 	$api = new wpdf_API_request;
 	//$result = $api->api_content_bulk($keyword, array($module => array("count" => $items_per_req, "start" => $start))); 
 	$result = $api->api_content_bulk($keyword, $marray); 

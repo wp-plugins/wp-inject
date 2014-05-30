@@ -317,7 +317,7 @@ jQuery(document).ready(function($) {
 					var imgurl = jQuery('#' + item).find(".wpdf_result_item_save .img").text(); 
 					imgurl = wpdf_get_image_size_url(imgurl, imgsize);
 				} else {
-					if(imgsize == "square" || imgsize == "large") {
+					if(imgsize == "square") {
 						pb_err = 1;pb_err_msg = 1;
 					} else {
 						var imgurl = jQuery('#' + item).find(".wpdf_result_item_save .img_" + imgsize).text(); 

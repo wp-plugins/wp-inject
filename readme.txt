@@ -2,7 +2,7 @@
 Contributors: thoefter
 Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo, pixabay
 Tested up to: 3.8.1
-Stable tag: 1.01
+Stable tag: 1.02
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,11 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 
 == Changelog ==  
+
+= 1.02 =
+- Adds large image size (1280px) to Pixabay results
+- Fixes a bug that caused unnecessary API requests being sent and prevented new images from getting added when repeating a search.
+- Updates the Flickr API to use SSL for all requests.
 
 = 1.01 =
 - Pixabay does not require you to enter an API key and username anymore! You can now use Pixabay right away after installing WP Inject.
