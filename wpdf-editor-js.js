@@ -48,6 +48,7 @@ function wpdf_parse_content(content, attribution, feat_end) {
 	//var win = window.dialogArguments || opener || parent || top;
 	//win.send_to_editor(content);
 	if(content != "") {
+		if(content == "FIMG") {content = "";}
 		if(jQuery("#content").is(":visible")) {
 			// HTML editor: always place at the end
 			document.getElementById('content').value += content;
@@ -458,7 +459,7 @@ jQuery(document).ready(function($) {
 				} else {
 					var attribution = wpdf_parse_attribution(item, module); 
 
-					wpdf_parse_content("", attribution, 1);
+					wpdf_parse_content("FIMG", attribution, 1);
 
 					jthis.remove();
 
