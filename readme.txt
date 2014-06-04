@@ -2,7 +2,7 @@
 Contributors: thoefter
 Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo, pixabay
 Tested up to: 3.8.1
-Stable tag: 1.03
+Stable tag: 1.04
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,11 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 
 == Changelog ==  
+
+= 1.04 =
+- Resets Pixabay API Keys. Please update to ensure Pixabay keeps working!
+- Large preview images are now loaded only when hovering over the thumbnail to increase performance.
+- An image search can now be started by pressing the "enter" button while the keyword field is active (previously saved the post).
 
 = 1.03 =
 - Fixes a bug that prevented Flickr attribution from getting added when setting a featured image.

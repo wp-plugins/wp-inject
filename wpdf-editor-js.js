@@ -199,6 +199,10 @@ function wpdf_parse_template(item, imgsize, img, orientation) {
 
 jQuery(document).ready(function($) {
 
+    jQuery('#wpdf_keyword').keypress(function(e){
+        if (e.which == 13) { jQuery('#wpdf-searchbutton').click(); return false; }
+    });
+
 	jQuery('.wpdf_select_all').live("click", function(e) {
 		var checkedStatus = this.checked;
 		var pid = jQuery(this).parent().parent().attr("id");
@@ -529,6 +533,12 @@ jQuery(document).ready(function($) {
 			wpdf_set_message("<strong>Image has been inserted into the editor.</strong>", 0, 0, loader);
 		}
 	});	
+
+	jQuery('.wpdf_result_item').hover(function(e) {
+		var r_image = jQuery(this).find(".wpdf_bigger_img");
+		var real_imgurl = r_image.attr("data-src"); 
+		r_image.attr("src", real_imgurl); 
+	});	
 	
 	jQuery('.wpdf-module').click(function(e) {
 
@@ -637,7 +647,9 @@ jQuery(document).ready(function($) {
 								if(sizelink != "") {	
 									sizelink += '<a title="Click to set featured image" class="wpdf_set_featured" href="#" >Featured Image</a>';
 
-									clone.find(".wpdf_result_item_content").html('<img class="wpdf_thumb" src="'+ imgurl_s +'" /><div class="wpdf_big_container"><div class="wpdf_bigger"><div class="wpdf_insert_links">' + sizelink + '</div><a href="' + img_link + '" target="_blank"><img class="wpdf_bigger_img" src="'+ imgurl_m +'" /></a><br/><small><em>' + title + '</em> by <a href="' + img_link + '" target="_blank">' + owner + '</a>' + datetaken + '</small></div></div>');
+									if(module == "pixabay") {var pbl = ' (<a href="http://pixabay.com" target="_blank">Pixabay</a>)';} else {var pbl = "";}
+									
+									clone.find(".wpdf_result_item_content").html('<img class="wpdf_thumb" src="'+ imgurl_s +'" /><div class="wpdf_big_container"><div class="wpdf_bigger"><div class="wpdf_insert_links">' + sizelink + '</div><a href="' + img_link + '" target="_blank"><img class="wpdf_bigger_img" src="" data-src="'+ imgurl_m +'" /></a><br/><small><em>' + title + '</em> by <a href="' + img_link + '" target="_blank">' + owner + '</a>' + pbl + datetaken + '</small></div></div>');
 									
 									clone.find(".wpdf_select_item_o").attr('name', "wpdf_select_item");
 									clone.find(".wpdf_select_item_o").attr('id', "wpdf_select_" + module + "_" + result_num);							

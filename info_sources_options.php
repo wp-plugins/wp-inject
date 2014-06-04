@@ -35,7 +35,7 @@ $source_infos = array(
 		
 		"pixabay" => array(
 			//"request" => 'http://pixabay.com/api/?username=thoefter&key=47b0f746df60162dfc2c&search_term={keyword}&image_type={image_type}',	
-			"request" => 'http://pixabay.com/api/?username=thoefter&key=47b0f746df60162dfc2c&search_term={keyword}&image_type={image_type}&response_group=high_resolution&per_page={num}&page={start}',			
+			"request" => 'http://pixabay.com/api/?username=wpinject&key=553b628f0c9d3dd72f82&search_term={keyword}&image_type={image_type}&response_group=high_resolution&per_page={num}&page={start}',			
 			"limits" => array("request" => 100, "total" => 1000),		
 			"title" => "tags",		
 			"unique" => "id",	
@@ -103,7 +103,7 @@ $modulearray = array(
 			"feat_img_size" => array("value" => "medium", "name" => "Featured Image Size", "type" => "select", "values" => array("square" => "Square (150px)", "small" => "Small (240px)", "medium" => "Medium (500px)", "large" => "Large (1024px)")),									
 			"default_align" => array("value" => "none", "name" => "Default Image Alignment", "type" => "select", "values" => array("none" => "None", "left" => "Left", "right" => "Right", "center" => "Center")),						
 			"attr_location" => array("value" => "bottom", "name" => "Attribution Location", "type" => "select", "values" => array("bottom" => "Bottom of Post", "image" => "Next to the Image")),						
-			"items_per_req" => array("value" => "50", "name" => "Results per Search", "type" => "select", "values" => array("20" => "20", "30" => "30", "40" => "40", "50" => "50", "60" => "60", "80" => "80", "100" => "100", "100" => "100", "150" => "150", "200" => "200", "300" => "300")),									
+			"items_per_req" => array("value" => "40", "name" => "Results per Search", "type" => "select", "values" => array("20" => "20", "30" => "30", "40" => "40", "50" => "50", "60" => "60", "80" => "80", "100" => "100", "100" => "100", "150" => "150", "200" => "200", "300" => "300")),									
 			"wpi_attr" => array("value" => 1, "name" => "Enable WP Inject Link", "type" => "checkbox", "info" => "Yes (adds an unobtrusive link to wpinject.com inside the image attribution. If you do not use this please share WP Inject in another way, e.g. via social media or by blogging about it. Thanks!)"),	
 		)
 	),	
