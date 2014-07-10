@@ -10,13 +10,13 @@ Easily insert images and photos into your blog posts! WP Inject searches the hug
 
 == Description ==
 
-[WP Inject](http://wpinject.com/ "Free plugin to insert images into WordPress posts") allows you to **easily insert photos and images into your WordPress posts**. Search among many thousands of creative commons images for any keywords of your choice, then pick the best of them for the article you are working on and insert them into your post or set them as featured image! Best of all it is super fast: Injecting an image only takes 3 clicks in total!
+[WP Inject](http://wpscoop.com/wp-inject "Free plugin to insert images into WordPress posts") allows you to **easily insert photos and images into your WordPress posts**. Search among many thousands of creative commons images for any keywords of your choice, then pick the best of them for the article you are working on and insert them into your post or set them as featured image! Best of all it is super fast: Injecting an image only takes 3 clicks in total!
 
 No further setup is required after installing WP Inject. You can start inserting photos right away! To do so the plugin adds an easy to use search metabox to your WordPress editor ("Add New" post screens). Simply enter any keyword to find great photos for your post. 
 
 Advanced users can head to the WP Inject settings page and fine tune the plugin. A lot of different options let you control most aspects of how WP Inject finds and inserts images into your posts. By editing the templates you can control exactly how the photos and automatic attribution will look on your blog!
 
-**Have a look at my [tutorial on how to install and use WP Inject](http://wpinject.com/tutorial/ "How to insert images with WP Inject") to get started with the plugin.** Besides explaining the basics the tutorial also contains details on all the available settings in WP Inject and how the plugin works together with WordPress SEO by Yoast. 
+**Have a look at my [tutorial on how to install and use WP Inject](http://wpscoop.com/wp-inject/#docs "How to insert images with WP Inject") to get started with the plugin.** Besides explaining the basics the tutorial also contains details on all the available settings in WP Inject and how the plugin works together with WordPress SEO by Yoast. 
 
 = Supported Image Sources: =
 *  **Flickr** - Over 200 million creative commons images. Attribution is automatically added where required.

@@ -1,11 +1,11 @@
 <?php
 /**
  Plugin Name: WP Inject
- Plugin URI: http://wpinject.com/
+ Plugin URI: http://wpscoop.com/wp-inject/
  Version: 1.04
  Description: Insert photos into your posts or set a featured image in less than a minute! WP Inject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post!
  Author: Thomas Hoefter
- Author URI: http://wpinject.com/
+ Author URI: http://wpscoop.com/
 */
 
 include_once("info_sources_options.php");
@@ -124,7 +124,7 @@ function wpdf_settings_page() {
 	if($_GET["test"] == 1) {	
 		@require_once("api.class.php");	
 		$api = new wpdf_API_request;
-		$result = $api->api_content_bulk("fun", array("flickr" => array("count" => 10, "start" => 1))); 
+		$result = $api->api_content_bulk("fun", array("pixabay" => array("count" => 120, "start" => 1))); 
 		//print_r($result);
 	}
 	
@@ -192,14 +192,14 @@ function wpdf_settings_page() {
 		<div class="wpdf_settings_box">
 			<p style="margin-top: 0;">To <strong>insert images</strong> go to the WordPress "<a href="post-new.php">New Post</a>" or "<a href="post-new.php?post_type=page">New Page</a>" screens where you will find the WP Inject metabox to search for great photos!</p>
 			
-			<p>Please <a href="http://wpinject.com/tutorial/" target="_blank"><strong>read my short WP Inject tutorial</strong></a> for more details on all the settings on this page and what exactly they do.</p>
+			<p>Please <a href="http://wpscoop.com/wp-inject/#docs" target="_blank"><strong>read my short WP Inject tutorial</strong></a> for more details on all the settings on this page and what exactly they do.</p>
 		
-			<p>Having problems or found a bug? Please <a href="http://wpinject.com/contact" target="_blank">contact me</a> or post in the WordPress support forum.</p>
+			<p>Having problems or found a bug? Please <a href="http://wpscoop.com/contact" target="_blank">contact me</a> or post in the WordPress support forum.</p>
 		
 			<p style="margin-bottom: 0;">If you find WP Inject useful <strong>please share!</strong><br/>
-				<a title="Share WP Inject on Twitter" target="_blank" class="wpdf_share_twitter" href="https://twitter.com/home?status=I%20am%20using%20WP%20Inject%20to%20insert%20CC%20images%20into%20my%20blog%20fast%20and%20for%20free:%20http://wpinject.com"></a>
-				<a title="Share WP Inject on Facebook" target="_blank" class="wpdf_share_fb" href="https://www.facebook.com/sharer/sharer.php?u=http://wpinject.com"></a>
-				<a title="Share WP Inject on Google+" target="_blank" class="wpdf_share_google" href="https://plus.google.com/share?url=http://wpinject.com"></a>
+				<a title="Share WP Inject on Twitter" target="_blank" class="wpdf_share_twitter" href="https://twitter.com/home?status=I%20am%20using%20WP%20Inject%20to%20insert%20CC%20images%20into%20my%20blog%20fast%20and%20for%20free:%20http://wpscoop.com/wp-inject/"></a>
+				<a title="Share WP Inject on Facebook" target="_blank" class="wpdf_share_fb" href="https://www.facebook.com/sharer/sharer.php?u=http://wpscoop.com/wp-inject/"></a>
+				<a title="Share WP Inject on Google+" target="_blank" class="wpdf_share_google" href="https://plus.google.com/share?url=http://wpscoop.com/wp-inject/"></a>
 			</p>
 		</div>	
 		
@@ -440,9 +440,9 @@ function wpdf_editor_metabox_content($post) {
 		
 		<div id="wpdf_share_box">Enjoying WP Inject? <strong>Please share!</strong> 
 			<a title="WP Inject settings page" target="_blank" class="wpdf_settings_link" href="options-general.php?page=wpdf-options">Settings</a>
-			<a title="Share WP Inject on Twitter" target="_blank" class="wpdf_share_twitter" href="https://twitter.com/home?status=I%20am%20using%20WP%20Inject%20to%20insert%20CC%20images%20into%20my%20blog%20fast%20and%20for%20free:%20http://wpinject.com"></a>
-			<a title="Share WP Inject on Facebook" target="_blank" class="wpdf_share_fb" href="https://www.facebook.com/sharer/sharer.php?u=http://wpinject.com"></a>
-			<a title="Share WP Inject on Google+" target="_blank" class="wpdf_share_google" href="https://plus.google.com/share?url=http://wpinject.com"></a>
+			<a title="Share WP Inject on Twitter" target="_blank" class="wpdf_share_twitter" href="https://twitter.com/home?status=I%20am%20using%20WP%20Inject%20to%20insert%20CC%20images%20into%20my%20blog%20fast%20and%20for%20free:%20http://wpscoop.com/wp-inject/"></a>
+			<a title="Share WP Inject on Facebook" target="_blank" class="wpdf_share_fb" href="https://www.facebook.com/sharer/sharer.php?u=http://wpscoop.com/wp-inject/"></a>
+			<a title="Share WP Inject on Google+" target="_blank" class="wpdf_share_google" href="https://plus.google.com/share?url=http://wpscoop.com/wp-inject/"></a>
 		</div>
 
 		<div id="wpdf_ri">	
