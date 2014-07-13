@@ -1,5 +1,5 @@
 ﻿=== WP Inject ===
-Contributors: thoefter
+Contributors: thoefter, wp-scoop
 Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo, pixabay
 Tested up to: 3.8.1
 Stable tag: 1.04
