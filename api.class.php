@@ -26,8 +26,6 @@ class wpdf_API_request {
 
 		$save_tags = 0;
 
-		// AUSEINANDERNEHMEN UND VERSTEHEN NÖTIG !!!!!
-		
 		$items = array();		
 		foreach($counts as $module => $data) {
 		
@@ -38,8 +36,6 @@ class wpdf_API_request {
 			
 			$limits = $this->sourceinfos["sources"][$module]["limits"];
 			if(!empty($limits["total"]) && $left > $limits["total"]) {$left = $limits["total"];}
-			
-			// WRONG ???? SHOULD BE $left ??? or does not matter?
 			
 			while(count($items[$module]) < $count && $count > 0) {
 			
@@ -307,6 +303,7 @@ class wpdf_API_request {
 				'Content-Type: application/xml'
 				));	}					
 			$response = curl_exec($ch);
+
 			if (!$response) {
 				$return["error"] = __("cURL Error Number ","wprobot").curl_errno($ch).": ".curl_error($ch);	
 				return $return;
@@ -319,7 +316,7 @@ class wpdf_API_request {
 				return $return;		
 			}
 		}
-		
+
 		if($json == 1) {
 			$pxml = json_decode($response);		
 			$xmlize = new wpdf_XMLSerializer;

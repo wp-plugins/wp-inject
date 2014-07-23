@@ -12,23 +12,30 @@
 	box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.20);	
 }
 
-.wpdf_settings_link {float: right;text-decoration: none;}
+.wpdf_settings_link, .wpdf_docs_link {float: right;text-decoration: none;}
 
 .wpdf_share_twitter, .wpdf_share_fb, .wpdf_share_google, .wpdf_settings_link {text-decoration: none;}
 
-.wpdf_share_twitter:before, .wpdf_share_fb:before, .wpdf_share_google:before, .wpdf_settings_link:before {
+.wpdf_docs_link:before, .wpdf_share_twitter:before, .wpdf_share_fb:before, .wpdf_share_google:before, .wpdf_settings_link:before {
 	text-decoration: none;
 	margin-left: 5px;
     display: inline-block;
     font: 22px/1 'dashicons' !important;
     vertical-align: top;
-    width: 22px;
+    width: 23px;
 	
 }
 .wpdf_share_twitter:before {content: "\f301";}
 .wpdf_share_fb:before {content: "\f304";}
 .wpdf_share_google:before {content: "\f462";}
 .wpdf_settings_link:before {content: "\f111";}
+.wpdf_docs_link:before {content: "\f468";}
+
+.wpdf_settings_box .wpdf_share_twitter:before, .wpdf_settings_box .wpdf_share_fb:before, .wpdf_settings_box .wpdf_share_google:before {
+    font: 40px/1 'dashicons' !important;
+    width: 45px;	
+}
+
 
 .wpdf_settings_box {float: right; width: 250px;background-color: #fff;padding: 10px;}
 

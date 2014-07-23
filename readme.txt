@@ -2,7 +2,7 @@
 Contributors: thoefter, wp-scoop
 Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo, pixabay
 Tested up to: 3.8.1
-Stable tag: 1.04
+Stable tag: 1.05
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,10 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 
 == Changelog ==  
+
+= 1.05 =
+- Fixes a problem that prevented WP Inject from working on blogs that use https://
+- Fixes a bug that prevented image search from working on WP multisite blogs.
 
 = 1.04 =
 - Resets Pixabay API Keys. Please update to ensure Pixabay keeps working!
