@@ -2,7 +2,7 @@
 /**
  Plugin Name: WP Inject
  Plugin URI: http://wpscoop.com/wp-inject/
- Version: 1.05
+ Version: 1.06
  Description: Insert photos into your posts or set a featured image in less than a minute! WP Inject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post!
  Author: Thomas Hoefter
  Author URI: http://wpscoop.com/
@@ -517,18 +517,32 @@ function wpdf_editor_scripts() {
 }
 
 if(is_admin()){
-	global $pagenow;
+	if(is_multisite()) {
+		if(preg_match("~/wp-admin/post\.php$~", $_SERVER['SCRIPT_NAME']) || preg_match("~/wp-admin/post-new\.php$~", $_SERVER['SCRIPT_NAME'])){
+			add_action('admin_head', 'wpdf_editor_head');		
+			add_action('admin_enqueue_scripts', 'wpdf_editor_scripts');
+		}		
 	
-	if($pagenow == 'post.php' || $pagenow == 'post-new.php'){
-		add_action('admin_head', 'wpdf_editor_head');		
-		add_action('admin_enqueue_scripts', 'wpdf_editor_scripts');
-	}
+		if(preg_match("~/wp-admin/admin-ajax\.php$~", $_SERVER['SCRIPT_NAME'])) {
+			require_once('wpdf_ajax.php');
+			add_action('wp_ajax_wpdf_editor', 'wpdf_editor_ajax_action_function');
+			add_action('wp_ajax_wpdf_save_to_server', 'wpdf_save_image_function');
+			add_action('wp_ajax_wpdf_save_multiple_to_server', 'wpdf_save_multiple_images_function');
+		}		
 
-	if($pagenow == 'admin-ajax.php'){
-		require_once('wpdf_ajax.php');
-		add_action('wp_ajax_wpdf_editor', 'wpdf_editor_ajax_action_function');
-		add_action('wp_ajax_wpdf_save_to_server', 'wpdf_save_image_function');
-		add_action('wp_ajax_wpdf_save_multiple_to_server', 'wpdf_save_multiple_images_function');
+	} else {
+		global $pagenow;
+		if($pagenow == 'post.php' || $pagenow == 'post-new.php'){
+			add_action('admin_head', 'wpdf_editor_head');		
+			add_action('admin_enqueue_scripts', 'wpdf_editor_scripts');
+		}	
+		
+		if($pagenow == 'admin-ajax.php'){
+			require_once('wpdf_ajax.php');
+			add_action('wp_ajax_wpdf_editor', 'wpdf_editor_ajax_action_function');
+			add_action('wp_ajax_wpdf_save_to_server', 'wpdf_save_image_function');
+			add_action('wp_ajax_wpdf_save_multiple_to_server', 'wpdf_save_multiple_images_function');
+		}		
 	}
 }
 ?>

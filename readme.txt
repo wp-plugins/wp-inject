@@ -2,7 +2,7 @@
 Contributors: thoefter, wp-scoop
 Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo, pixabay
 Tested up to: 3.8.1
-Stable tag: 1.05
+Stable tag: 1.06
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,9 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 
 == Changelog ==  
+
+= 1.06 =
+- Fixes a bug that prevents WP Inject from loading all its scripts on multisite blogs.
 
 = 1.05 =
 - Fixes a problem that prevented WP Inject from working on blogs that use https://
