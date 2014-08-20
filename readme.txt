@@ -1,27 +1,27 @@
-﻿=== WP Inject ===
+﻿=== ImageInject ===
 Contributors: thoefter, wp-scoop
-Tags: insert, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo, pixabay
+Tags: insert, imageinject, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo, pixabay, caption, vector, graphics
 Tested up to: 3.8.1
-Stable tag: 1.06
+Stable tag: 1.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easily insert images and photos into your blog posts! WP Inject searches the huge Flickr database for creative commons photos related to any topic.
+Easily insert images and photos into your blog posts! ImageInject searches the huge Flickr database for creative commons photos related to any topic.
 
 == Description ==
 
-[WP Inject](http://wpscoop.com/wp-inject "Free plugin to insert images into WordPress posts") allows you to **easily insert photos and images into your WordPress posts**. Search among many thousands of creative commons images for any keywords of your choice, then pick the best of them for the article you are working on and insert them into your post or set them as featured image! Best of all it is super fast: Injecting an image only takes 3 clicks in total!
+[ImageInject](http://wpscoop.com/wp-inject "Free plugin to insert images into WordPress posts"), previously called WP Inject, allows you to **easily insert photos and images into your WordPress posts**. Search among many thousands of free creative commons images for any keywords of your choice, then pick the best of them for the article you are working on and insert them into your post or set them as featured image! Best of all it is super fast: Injecting an image only takes 3 clicks in total!
 
-No further setup is required after installing WP Inject. You can start inserting photos right away! To do so the plugin adds an easy to use search metabox to your WordPress editor ("Add New" post screens). Simply enter any keyword to find great photos for your post. 
+No further setup is required after installing ImageInject. You can start inserting photos right away! To do so the plugin adds an easy to use search metabox to your WordPress editor ("Add New" post screens). Simply enter any keyword to find great photos for your post. 
 
-Advanced users can head to the WP Inject settings page and fine tune the plugin. A lot of different options let you control most aspects of how WP Inject finds and inserts images into your posts. By editing the templates you can control exactly how the photos and automatic attribution will look on your blog!
+Advanced users can head to the ImageInject settings page and fine tune the plugin. A lot of different options let you control most aspects of how ImageInject finds and inserts images into your posts. By editing the templates you can control exactly how the photos and automatic attribution will look on your blog!
 
-**Have a look at my [tutorial on how to install and use WP Inject](http://wpscoop.com/wp-inject/#docs "How to insert images with WP Inject") to get started with the plugin.** Besides explaining the basics the tutorial also contains details on all the available settings in WP Inject and how the plugin works together with WordPress SEO by Yoast. 
+**Have a look at my [tutorial on how to install and use ImageInject](http://wpscoop.com/wp-inject/#docs "How to insert images with ImageInject") to get started with the plugin.** Besides explaining the basics the tutorial also contains details on all the available settings in ImageInject and how the plugin works together with WordPress SEO by Yoast. 
 
 = Supported Image Sources: =
 *  **Flickr** - Over 200 million creative commons images. Attribution is automatically added where required.
 *  **Pixabay** - More than 150,000 high quality public domain photos. No attribution required for any of them!
-*  More sources will be added in the future, including support for injecting videos, ads and other types of content!
+*  More sources will be added in the future to bring you even more free images for your blog posts!
 
 = Features: =
 *  Search thousands of creative commons photos and include any into your posts.
@@ -30,25 +30,27 @@ Advanced users can head to the WP Inject settings page and fine tune the plugin.
 *  Set the featured image for your post with a single click.
 *  Insert multiple images at once and create whole galleries! 
 *  Choose between several image sizes easily.
-*  Modify the templates of WP Inject to change how images get displayed in your posts.
+*  Modify the templates of ImageInject to change how images get displayed in your posts.
 *  Images are saved to your own server and added to the WordPress media library.
 *  Automatically populated ALT and title tags of the image for search engine optimization.
 *  Search for many different keywords and compare the results to find the best matches.
 *  Can use and insert your focus keyword set in WordPress SEO by Yoast for easier image search optimization.
-
-
-I will update WP Inject regularly. The first feature update was released only a week after the initial launch of WP Inject and more will certainly follow soon! 
+*  Display attribution in WordPress caption shortcodes right next to inserted images.
 
 If you find any bugs please report them! General feedback or feature requests are also welcome. 
 
 
 == Changelog ==  
 
+= 1.10 =
+- WP Inject has been renamed to ImageInject
+- Adds support for displaying attribution as a WordPress caption shortcode. You can enable this on the settings page (active by default on new installations).
+
 = 1.06 =
-- Fixes a bug that prevents WP Inject from loading all its scripts on multisite blogs.
+- Fixes a bug that prevents ImageInject from loading all its scripts on multisite blogs.
 
 = 1.05 =
-- Fixes a problem that prevented WP Inject from working on blogs that use https://
+- Fixes a problem that prevented ImageInject from working on blogs that use https://
 - Fixes a bug that prevented image search from working on WP multisite blogs.
 
 = 1.04 =
@@ -65,7 +67,7 @@ If you find any bugs please report them! General feedback or feature requests ar
 - Updates the Flickr API to use SSL for all requests.
 
 = 1.01 =
-- Pixabay does not require you to enter an API key and username anymore! You can now use Pixabay right away after installing WP Inject.
+- Pixabay does not require you to enter an API key and username anymore! You can now use Pixabay right away after installing ImageInject.
 
 = 1.00 =
 - Adds Pixabay as an additional image source, providing over 150,000 high quality photos for your posts. 
@@ -86,7 +88,7 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 = 0.50 =
 - Adds support to save multiple images to your media libary with one click
-- Adds WP multisite support: You can now use "network activate" to activate WP Inject on all your blogs at the same time
+- Adds WP multisite support: You can now use "network activate" to activate ImageInject on all your blogs at the same time
 
 = 0.41 =
 - Fixes a bug that prevented one of the "Save Settings" buttons on the options page from working.
@@ -109,7 +111,7 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 == Screenshots ==
 
-1. The metabox is added to the WordPress editor page by WP Inject and allows you to search for photos fast.
+1. The metabox is added to the WordPress editor page by ImageInject and allows you to search for photos fast.
 
 2. Photo search results. Hover over any thumbnail and click on one of the size links to insert the photo into your post immediately.
 
@@ -120,7 +122,7 @@ If you find any bugs please report them! General feedback or feature requests ar
 == Installation ==
 
 1. Upload the plugin folder to your /wp-content/plugins/ directory
-2. Go to the "Plugins" page in your WordPress admin and activate WP Inject
-3. Go to the "Add New" post or page screen in your WordPress admin and you will find a new metabox for WP Inject that allows you to easily insert images.
+2. Go to the "Plugins" page in your WordPress admin and activate ImageInject
+3. Go to the "Add New" post or page screen in your WordPress admin and you will find a new metabox for ImageInject that allows you to easily insert images.
 
-You can read my tutorial for more details on [how to install and use WP Inject](http://wpinject.com/tutorial/ "How to insert images with WP Inject").
+You can read my tutorial for more details on [how to install and use ImageInject](http://wpinject.com/tutorial/ "How to insert images with ImageInject").

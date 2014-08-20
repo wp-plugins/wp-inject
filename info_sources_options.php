@@ -23,10 +23,10 @@ $source_infos = array(
 					"name" => "Medium Image",
 					"content" => '<div class="owner">{owner}</div><div class="title">{title}</div><div class="license">{license}</div>
 					<div class="sizes">
-					<div class="square"><strong>SQ</strong> {width_q} x {height_q}px</div>
-					<div class="small"><strong>S</strong> {width_s} x {height_s}px</div>
-					<div class="medium"><strong>M</strong> {width_m} x {height_m}px</div>
-					[IF:height_l]<div class="large"><strong>L</strong> {height_l} x {width_l}px</div>[/IF:height_l]
+					<div class="square"><strong>SQ</strong> <span>{width_q}</span> x {height_q}px</div>
+					<div class="small"><strong>S</strong> <span>{width_s}</span> x {height_s}px</div>
+					<div class="medium"><strong>M</strong> <span>{width_m}</span> x {height_m}px</div>
+					[IF:height_l]<div class="large"><strong>L</strong> <span>{width_l}</span> x {height_l}px</div>[/IF:height_l]
 					</div>
 					<div class="name">{ownername}</div><div class="id">{id}</div><div class="date">{datetaken}</div><div class="description">{description}</div><div class="img">{url_s}</div><div class="link">http://www.flickr.com/photos/{owner}/{id}</div>'
 				)		
@@ -102,9 +102,9 @@ $modulearray = array(
 			"save_images" => array("value" => 1, "name" => "Save Images to Server", "type" => "checkbox", "info" => "Yes"),	
 			"feat_img_size" => array("value" => "medium", "name" => "Featured Image Size", "type" => "select", "values" => array("square" => "Square (150px)", "small" => "Small (240px)", "medium" => "Medium (500px)", "large" => "Large (1024px)")),									
 			"default_align" => array("value" => "none", "name" => "Default Image Alignment", "type" => "select", "values" => array("none" => "None", "left" => "Left", "right" => "Right", "center" => "Center")),						
-			"attr_location" => array("value" => "bottom", "name" => "Attribution Location", "type" => "select", "values" => array("bottom" => "Bottom of Post", "image" => "Next to the Image")),						
+			"attr_location" => array("value" => "caption", "name" => "Attribution Location", "type" => "select", "values" => array("caption" => "WordPress caption next to image", "bottom" => "Bottom of Post", "image" => "Next to the Image")),						
 			"items_per_req" => array("value" => "40", "name" => "Results per Search", "type" => "select", "values" => array("20" => "20", "30" => "30", "40" => "40", "50" => "50", "60" => "60", "80" => "80", "100" => "100", "100" => "100", "150" => "150", "200" => "200", "300" => "300")),									
-			"wpi_attr" => array("value" => 1, "name" => "Enable WP Inject Link", "type" => "checkbox", "info" => "Yes (adds an unobtrusive link to wpinject.com inside the image attribution. If you do not use this please share WP Inject in another way, e.g. via social media or by blogging about it. Thanks!)"),	
+			"wpi_attr" => array("value" => 1, "name" => "Enable ImageInject Link", "type" => "checkbox", "info" => "Yes (adds an unobtrusive link to ImageInject inside the author attribution. If you do not use this please consider sharing in another way, e.g. via social media or by blogging about it. Thanks!)"),	
 		)
 	),	
 	"advanced" => array(

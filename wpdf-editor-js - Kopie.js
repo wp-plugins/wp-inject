@@ -1,5 +1,6 @@
 
-// to do: test, write short post
+// to do: get image width and add to caption + image tag, no id req
+// add align tag as in settings to caption
 
 var resultCount = (function (module) {
 	var state = {};
@@ -45,19 +46,39 @@ function wpdf_set_message(message, error, show_load, replace_load) {
 	return randomnumber;
 }
 
-function wpdf_parse_content(content, attribution, feat_end) {
+function wpdf_parse_content(content, attribution, feat_end, orientation, width) {
 
 	//var win = window.dialogArguments || opener || parent || top;
 	//win.send_to_editor(content);
+	if(orientation == "setting") {
+		orientation = wpdf_default_align;
+	}	
+	
+	if(orientation == "left") {
+		var aligncaption = "alignleft";
+	} else if(orientation == "right") {
+		var aligncaption = "alignright";
+	} else if(orientation == "center") {
+		var aligncaption = "aligncenter";
+	} else {
+		var aligncaption = "alignnone";
+	}
 
 	if(content != "") {
 		if(content == "FIMG") {content = "";}
 		if(jQuery("#content").is(":visible")) {
 			// HTML editor: always place at the end
+			if(wpdf_attr_location == "caption" && feat_end != 1 && attribution != "" && width != "") {
+				content = '[caption id="" align="' + aligncaption + '" width="' + width + '"]' + content + ' ' + attribution + '[/caption]';
+				attribution = '';
+			}
 			document.getElementById('content').value += content;
 			document.getElementById('content').value += attribution;
 		} else {
-			if(wpdf_attr_location == "image" && feat_end != 1) { // determine attribution placement
+			if(wpdf_attr_location == "caption" && feat_end != 1 && attribution != "" && width != "") {
+				content = '[caption id="" align="' + aligncaption + '" width="' + width + '"]' + content + ' ' + attribution + '[/caption]';
+				tinyMCE.execCommand('mceInsertContent',false,content);				
+			} else if(wpdf_attr_location == "image" && feat_end != 1) { // determine attribution placement
 				content = content + attribution;
 				tinyMCE.execCommand('mceInsertContent',false,content);
 			} else {
@@ -87,7 +108,7 @@ function wpdf_get_image_size_url(imgurl, imgsize) {
 
 function wpdf_parse_attribution_multi(content, module) {
 
-	if(module == "pixabay" || wpdf_attr_location == "caption") {
+	if(module == "pixabay") {
 		return "";
 	} else {
 		var template = wpdf_attr_template_multi;	
@@ -95,21 +116,17 @@ function wpdf_parse_attribution_multi(content, module) {
 
 		if(wpdf_wpi_attr == "1") {	
 			if (template.indexOf('Photos') > -1) {
-				template = template.replace('Photos', '<a style="text-decoration: none;" href="http://wpinject.com/" title="Photo inserted by the ImageInject WordPress plugin">Photos</a>');
+				template = template.replace('Photos', '<a style="text-decoration: none;" href="http://wpinject.com/" title="Photo inserted by the WP Inject WordPress plugin">Photos</a>');
 			} else {
-				template = template + '<small> via <a style="text-decoration: none;" href="http://wpinject.com/" title="Free WordPress plugin to insert images into posts">ImageInject</a></small>';
+				template = template + '<small> via <a style="text-decoration: none;" href="http://wpinject.com/" title="Free WordPress plugin to insert images into posts">WP Inject</a></small>';
 			}		
 		}
 		return template;
 	}
 }
 
-function wpdf_parse_attribution(item, module, nocap) {
+function wpdf_parse_attribution(item, module) {
 
-	if(wpdf_attr_location == "caption" && nocap != 1) {
-		return "";
-	}
-	
 	if(module == "pixabay") {
 		return "";
 	} else {
@@ -159,14 +176,14 @@ function wpdf_parse_attribution(item, module, nocap) {
 		template = template.replace('{license_link}', license_link);
 		
 		if(wpdf_wpi_attr == "1") {
-			template = template.replace('Photo', '<a rel="nofollow" style="text-decoration: none;" href="http://wpinject.com/" title="Image inserted by the ImageInject WordPress plugin">Photo</a>');
+			template = template.replace('Photo', '<a rel="nofollow" style="text-decoration: none;" href="http://wpinject.com/" title="Image inserted by the WP Inject WordPress plugin">Photo</a>');
 		}
 
 		return template;
 	}
 }
 
-function wpdf_parse_template(item, imgsize, img, orientation, module) {
+function wpdf_parse_template(item, imgsize, img, orientation) {
 
 	var template = wpdf_img_template;
 
@@ -204,27 +221,6 @@ function wpdf_parse_template(item, imgsize, img, orientation, module) {
 	if(width != "") {
 		template = template.replace('<img', '<img width="' + width + '"');	
 	}
-	
-	
-	if(wpdf_attr_location == "caption" && width != "" && module != "pixabay") {
-	
-		if(orientation == "") {
-			orientation = wpdf_default_align;
-		}	
-		
-		if(orientation == "left") {
-			var aligncaption = "alignleft";
-		} else if(orientation == "right") {
-			var aligncaption = "alignright";
-		} else if(orientation == "center") {
-			var aligncaption = "aligncenter";
-		} else {
-			var aligncaption = "alignnone";
-		}	
-	
-		attribution = wpdf_parse_attribution(item, module, 1);
-		template = '[caption id="" align="' + aligncaption + '" width="' + width + '"]' + template + ' ' + attribution + '[/caption]';
-	}	
 	
 	return template;
 }
@@ -399,7 +395,7 @@ jQuery(document).ready(function($) {
 								o = o + 1;
 								
 								//var attrcontent = wpdf_parse_attribution(item);
-								var addcontent = wpdf_parse_template(item, imgsize, imgurl, orientation, modulex);
+								var addcontent = wpdf_parse_template(item, imgsize, imgurl, orientation);
 								imgcontent += addcontent;	
 								
 								if(modulex != "pixabay") {								
@@ -417,7 +413,8 @@ jQuery(document).ready(function($) {
 								var attr = "";
 							}
 							
-							wpdf_parse_content(imgcontent, attr, 0);
+							var width = jQuery('#' + item).find(".wpdf_result_item_save .sizes ." + imgsize + " span").text(); 
+							wpdf_parse_content(imgcontent, attr, 0, orientation, width);
 							
 							wpdf_set_message("<strong>Selected images have been inserted into the editor.</strong>", 0, 0, loader);								
 						} else {
@@ -434,11 +431,8 @@ jQuery(document).ready(function($) {
 
 				var item = jQuery(this).parent().parent().attr('id');
 				
-				var modulex = item.split('_');
-				modulex = modulex[3];					
-				
-				var attrcontent = wpdf_parse_attribution(item, modulex, 0);
-				var addcontent = wpdf_parse_template(item, imgsize, "", orientation, modulex);
+				var attrcontent = wpdf_parse_attribution(item);
+				var addcontent = wpdf_parse_template(item, imgsize, "", orientation);
 				imgcontent += addcontent;			
 
 				var owner_name = jQuery('#' + item).find(".wpdf_result_item_save .name").text(); 
@@ -448,8 +442,12 @@ jQuery(document).ready(function($) {
 			});	
 
 			var attr = wpdf_parse_attribution_multi(attrcontentall);
-
-			wpdf_parse_content(imgcontent, attr, 0);
+			
+			
+			// PROBLEM !!! size for each item needed with multi insert
+			//var width = jQuery('#' + item).find(".wpdf_result_item_save .sizes ." + imgsize + " span").text(); 
+			
+			wpdf_parse_content(imgcontent, attr, 0, orientation, "");
 			
 			wpdf_set_message("<strong>Selected images have been inserted into the editor.</strong>", 0, 0, loader);			
 		}
@@ -496,9 +494,9 @@ jQuery(document).ready(function($) {
 					jthis.show();
 					wpdf_set_message(response.error, 1, 0, loader);
 				} else {
-					var attribution = wpdf_parse_attribution(item, module, 0); 
+					var attribution = wpdf_parse_attribution(item, module); 
 
-					wpdf_parse_content("FIMG", attribution, 1);
+					wpdf_parse_content("FIMG", attribution, 1, "", "");
 
 					jthis.remove();
 
@@ -521,7 +519,7 @@ jQuery(document).ready(function($) {
 		var module = item.split('_');
 		module = module[3];		
 		var keyword = jQuery('#wpdf_keyword').val();
-		var attrcontent = wpdf_parse_attribution(item, module, 0);
+		var attrcontent = wpdf_parse_attribution(item, module);
 
 		if(wpdf_save_images == 1 || module == "pixabay") {
 		
@@ -552,8 +550,9 @@ jQuery(document).ready(function($) {
 					} else {
 						imgurl = response.result;
 
-						var addcontent = wpdf_parse_template(item, imgsize, imgurl, wpdf_default_align, module);
-						wpdf_parse_content(addcontent, attrcontent, 0);	
+						var addcontent = wpdf_parse_template(item, imgsize, imgurl, wpdf_default_align);
+						var width = jQuery('#' + item).find(".wpdf_result_item_save .sizes ." + imgsize + " span").text(); 
+						wpdf_parse_content(addcontent, attrcontent, 0, "setting", width);	
 
 						wpdf_set_message("<strong>Image has been saved to your server and inserted into the editor.</strong>", 0, 0, loader);
 					}
@@ -562,8 +561,9 @@ jQuery(document).ready(function($) {
 			return false;
 		} else {
 
-			var addcontent = wpdf_parse_template(item, imgsize, "", wpdf_default_align, module);
-			wpdf_parse_content(addcontent, attrcontent, 0);
+			var addcontent = wpdf_parse_template(item, imgsize, "", wpdf_default_align);
+			var width = jQuery('#' + item).find(".wpdf_result_item_save .sizes ." + imgsize + " span").text(); 
+			wpdf_parse_content(addcontent, attrcontent, 0, "setting", width);
 
 			wpdf_set_message("<strong>Image has been inserted into the editor.</strong>", 0, 0, loader);
 		}

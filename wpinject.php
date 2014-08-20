@@ -1,9 +1,9 @@
 <?php
 /**
- Plugin Name: WP Inject
+ Plugin Name: ImageInject
  Plugin URI: http://wpscoop.com/wp-inject/
- Version: 1.06
- Description: Insert photos into your posts or set a featured image in less than a minute! WP Inject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post!
+ Version: 1.10
+ Description: Insert photos into your posts or set a featured image in less than a minute! ImageInject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post. Previously known as WP Inject.
  Author: Thomas Hoefter
  Author URI: http://wpscoop.com/
 */
@@ -11,7 +11,7 @@
 include_once("info_sources_options.php");
 
 function wpdf_add_menu_pages() {
-	$wpdf_settings = add_options_page('WP Inject', 'WP Inject', 'manage_options', 'wpdf-options', 'wpdf_settings_page');
+	$wpdf_settings = add_options_page('Image Inject', 'Image Inject', 'manage_options', 'wpdf-options', 'wpdf_settings_page');
 	add_action( "admin_print_scripts-$wpdf_settings", 'wpdf_settings_page_scripts' );		
 }
 add_action('admin_menu', 'wpdf_add_menu_pages');
@@ -186,23 +186,23 @@ function wpdf_settings_page() {
 
 <div class="wrap">
 
-	<h2><?php _e("WP Inject Settings","wpinject") ?></h2>
+	<h2><?php _e("ImageInject Settings","wpinject") ?></h2>
 	
 	<div style="width:28%;float: right;">		
 		<div class="wpdf_settings_box">
-			<p style="margin-top: 0;">To <strong>insert images</strong> go to the WordPress "<a href="post-new.php">New Post</a>" or "<a href="post-new.php?post_type=page">New Page</a>" screens where you will find the WP Inject metabox to search for great photos!</p>
+			<p style="margin-top: 0;">To <strong>insert images</strong> go to the WordPress "<a href="post-new.php">New Post</a>" or "<a href="post-new.php?post_type=page">New Page</a>" screens where you will find the ImageInject metabox to search for great photos!</p>
 			
-			<p>Please <a href="http://wpscoop.com/wp-inject/#docs" target="_blank"><strong>read my short WP Inject tutorial</strong></a> for more details on all the settings on this page and what exactly they do.</p>
+			<p>Please <a href="http://wpscoop.com/wp-inject/#docs" target="_blank"><strong>read my short ImageInject tutorial</strong></a> for more details on all the settings on this page and what exactly they do.</p>
 		
 			<p>Having problems or found a bug? Please <a href="http://wpscoop.com/contact" target="_blank">contact me</a> or post in the WordPress support forum.</p>
 
 		</div>	
 		
 		<div class="wpdf_settings_box">		
-			<p style="text-align: center;margin: 0;">If you find WP Inject useful <strong>please share!</strong><br/>
-				<a title="Share WP Inject on Twitter" target="_blank" class="wpdf_share_twitter" href="https://twitter.com/home?status=This%20%23WordPress%20plugin%20by%20@wpscoop%20makes%20finding%20and%20inserting%20free%20photos%20into%20my%20blog%20posts%20super%20easy:%20http://wpscoop.com/wp-inject"></a>
-				<a title="Share WP Inject on Facebook" target="_blank" class="wpdf_share_fb" href="https://www.facebook.com/sharer/sharer.php?u=http://wpscoop.com/wp-inject/"></a>
-				<a title="Share WP Inject on Google+" target="_blank" class="wpdf_share_google" href="https://plus.google.com/share?url=http://wpscoop.com/wp-inject/"></a>
+			<p style="text-align: center;margin: 0;">If you find ImageInject useful <strong>please share!</strong><br/>
+				<a title="Share ImageInject on Twitter" target="_blank" class="wpdf_share_twitter" href="https://twitter.com/home?status=This%20%23WordPress%20plugin%20by%20@wpscoop%20makes%20finding%20and%20inserting%20free%20photos%20into%20my%20blog%20posts%20super%20easy:%20http://wpscoop.com/wp-inject"></a>
+				<a title="Share ImageInject on Facebook" target="_blank" class="wpdf_share_fb" href="https://www.facebook.com/sharer/sharer.php?u=http://wpscoop.com/wp-inject/"></a>
+				<a title="Share ImageInject on Google+" target="_blank" class="wpdf_share_google" href="https://plus.google.com/share?url=http://wpscoop.com/wp-inject/"></a>
 			</p>		
 		</div>				
 		
@@ -213,7 +213,7 @@ function wpdf_settings_page() {
 		</div>		
 		
 		<div class="wpdf_settings_box">
-			<p><strong>Image Sources in WP Inject</strong><br>Click for more information:</p>
+			<p><strong>Image Sources in ImageInject</strong><br>Click for more information:</p>
 			
 			<p><a href="http://flickr.com/" target="_blank"><strong>Flickr</strong></a>, the popular photo uploading service by Yahoo, contains more than 200 million creative commons images.</p>
 			
@@ -316,7 +316,7 @@ function wpdf_settings_page() {
 	<h3>Available Template Tags</h3>
 	<p>You can use the following tags in the "<strong>Image Template</strong>" setting field:</p>
 	<p>
-		<strong>{keyword}</strong> - The keyword you searched for with WP Inject.<br/>
+		<strong>{keyword}</strong> - The keyword you searched for with ImageInject.<br/>
 		<strong>{yoast-keyword}</strong> - Inserts the "Focus Keyword" as set in the WordPress SEO by Yoast plugin for the post.<br/>	
 		<strong>{title}</strong> - The title of the image on Flickr.<br/>
 		<strong>{description}</strong> -  The description of the image on Flickr<br/>
@@ -326,7 +326,7 @@ function wpdf_settings_page() {
 	</p>
 	<p>The following tags are available in the "<strong>Attribution Template</strong>" field:</p>	
 	<p>
-		<strong>{keyword}</strong> - The keyword you searched for with WP Inject.<br/>
+		<strong>{keyword}</strong> - The keyword you searched for with ImageInject.<br/>
 		<strong>{author}</strong> - Flickr name or username of the author.<br/>
 		<strong>{link}</strong> - Link to the image page on Flickr<br/>
 		<strong>{cc_icon}</strong> - A small creative commons icon with a link to the license<br/>
@@ -350,7 +350,7 @@ add_action( 'add_meta_boxes', 'wpdf_editor_metabox' );
 function wpdf_editor_metabox() {
 	$screens = array('post', 'page');
 	foreach ($screens as $screen) {
-		add_meta_box('wpdf_editor_section',__( 'WP Inject', 'wpinject' ), 'wpdf_editor_metabox_content', $screen);
+		add_meta_box('wpdf_editor_section',__( 'ImageInject - Find Free Images', 'wpinject' ), 'wpdf_editor_metabox_content', $screen);
 	}
 }
 
@@ -381,7 +381,7 @@ function wpdf_editor_metabox_content($post) {
 		}
 	} else {
 		$moduleactive = -1;
-		echo "Error: Options for WP Inject not found. Please try de- and reactivating the plugin.";
+		echo "Error: Options for ImageInject not found. Please try de- and reactivating the plugin.";
 	}
 	
 	if($moduleactive == 0) {
@@ -389,7 +389,7 @@ function wpdf_editor_metabox_content($post) {
 		<div id="wpdf_save_keys_form">
 			<p><?php _e("To start injecting images please enter your Flickr API key below:","wpinject") ?></p>
 			<label for="flickr_appid">Flickr API Key: <input type="text" value="" id="flickr_appid" name="flickr_appid" class="regular-text"></label><br/>
-			<p><?php _e('For more settings head to the <a href="/wp-admin/options-general.php?page=wpdf-options">WP Inject Options</a> page.',"wpinject") ?></p>
+			<p><?php _e('For more settings head to the <a href="/wp-admin/options-general.php?page=wpdf-options">ImageInject Options</a> page.',"wpinject") ?></p>
 			<p><input type="submit" value="Save" id="wpdf_save_keys" name="wpdf_save_keys" class="button-primary"></p>
 		</div>
 		<?php
@@ -400,7 +400,7 @@ function wpdf_editor_metabox_content($post) {
 	
 		<div id="wpdf_modules">
 			<div>
-				<input placeholder="<?php _e("Enter search keyword","wpinject") ?>" type="text" value="" size="30" class="newtag form-input-tip" name="wpdf_keyword" id="wpdf_keyword">
+				<input placeholder="<?php _e("Enter a keyword to find photos","wpinject") ?>" type="text" value="" size="30" class="newtag form-input-tip" name="wpdf_keyword" id="wpdf_keyword">
 
 				<div class="wpdf_search_item_content">
 					<a style="margin-right: 10px;" type="button" class="button wpdf-module" id="wpdf-searchbutton">Search</a>
@@ -445,12 +445,12 @@ function wpdf_editor_metabox_content($post) {
 		<div id="wpdf_results">			
 		</div>
 		
-		<div id="wpdf_share_box">Enjoying WP Inject? <strong>Please share!</strong> 
-			<a title="WP Inject tutorial on WPscoop.com" target="_blank" class="wpdf_docs_link" href="http://wpscoop.com/wp-inject">Docs</a>			
-			<a title="WP Inject settings page" target="_blank" class="wpdf_settings_link" href="options-general.php?page=wpdf-options">Settings</a>		
-			<a title="Share WP Inject on Twitter" target="_blank" class="wpdf_share_twitter" href="https://twitter.com/home?status=This%20%23WordPress%20plugin%20by%20@wpscoop%20makes%20finding%20and%20inserting%20free%20photos%20into%20my%20blog%20posts%20super%20easy:%20http://wpscoop.com/wp-inject"></a>
-			<a title="Share WP Inject on Facebook" target="_blank" class="wpdf_share_fb" href="https://www.facebook.com/sharer/sharer.php?u=http://wpscoop.com/wp-inject/"></a>
-			<a title="Share WP Inject on Google+" target="_blank" class="wpdf_share_google" href="https://plus.google.com/share?url=http://wpscoop.com/wp-inject/"></a>
+		<div id="wpdf_share_box">Enjoying ImageInject? <strong>Please share!</strong> 
+			<a title="ImageInject tutorial on WPscoop.com" target="_blank" class="wpdf_docs_link" href="http://wpscoop.com/wp-inject">Docs</a>			
+			<a title="ImageInject settings page" target="_blank" class="wpdf_settings_link" href="options-general.php?page=wpdf-options">Settings</a>		
+			<a title="Share ImageInject on Twitter" target="_blank" class="wpdf_share_twitter" href="https://twitter.com/home?status=This%20%23WordPress%20plugin%20by%20@wpscoop%20makes%20finding%20and%20inserting%20free%20photos%20into%20my%20blog%20posts%20super%20easy:%20http://wpscoop.com/wp-inject"></a>
+			<a title="Share ImageInject on Facebook" target="_blank" class="wpdf_share_fb" href="https://www.facebook.com/sharer/sharer.php?u=http://wpscoop.com/wp-inject/"></a>
+			<a title="Share ImageInject on Google+" target="_blank" class="wpdf_share_google" href="https://plus.google.com/share?url=http://wpscoop.com/wp-inject/"></a>
 		</div>			
 		
 		<div style="clear: both;"></div>
