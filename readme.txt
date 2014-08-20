@@ -1,7 +1,7 @@
 ﻿=== ImageInject ===
 Contributors: thoefter, wp-scoop
 Tags: insert, imageinject, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo, pixabay, caption, vector, graphics
-Tested up to: 3.8.1
+Tested up to: 3.9.3
 Stable tag: 1.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
