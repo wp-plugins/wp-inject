@@ -1,8 +1,8 @@
 ﻿=== ImageInject ===
 Contributors: thoefter, wp-scoop
 Tags: insert, imageinject, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo, pixabay, caption, vector, graphics
-Tested up to: 3.9.3
-Stable tag: 1.10
+Tested up to: 4.0
+Stable tag: 1.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,9 @@ If you find any bugs please report them! General feedback or feature requests ar
 
 
 == Changelog ==  
+
+= 1.10 =
+- Support for custom post types: Image search form is now displayed for all your custom posts!
 
 = 1.10 =
 - WP Inject has been renamed to ImageInject
