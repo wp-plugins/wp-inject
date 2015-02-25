@@ -2,7 +2,7 @@
 Contributors: thoefter, wp-scoop
 Tags: insert, imageinject, wpinject, pictures, flickr, api, images, editor, photos, photo, image, inject, creative commons, creative, commons, gallery, media, thumbnail, seo, pixabay, caption, vector, graphics
 Tested up to: 4.0
-Stable tag: 1.11
+Stable tag: 1.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,12 +37,15 @@ Advanced users can head to the ImageInject settings page and fine tune the plugi
 *  Can use and insert your focus keyword set in WordPress SEO by Yoast for easier image search optimization.
 *  Display attribution in WordPress caption shortcodes right next to inserted images.
 
-If you find any bugs please report them! General feedback or feature requests are also welcome. 
-
+ImageInject has also been implemented into [CMS Commander](http://cmscommander.com/ "Manage WordPress faster!"), my service that allows you to manage any number of WordPress blogs from a single dashboard.
 
 == Changelog ==  
 
-= 1.10 =
+= 1.12 =
+- Added: The caption attribution is now saved to the database, so that it can be reused in future posts.
+- Fixed: Attribution is now inserted properly when inserting featured images.
+
+= 1.11 =
 - Support for custom post types: Image search form is now displayed for all your custom posts!
 
 = 1.10 =

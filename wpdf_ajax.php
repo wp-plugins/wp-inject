@@ -134,7 +134,7 @@ function wpdf_save_image_alt($src, $post_id, $thumb) {
 	}	
 }
 
-function wpdf_save_image($url, $post_id, $thumb = 0, $filename = "", $keyword = "") {
+function wpdf_save_image($url, $post_id, $thumb = 0, $filename = "", $keyword = "", $attr = "") {
 
     require_once( ABSPATH . 'wp-admin/includes/file.php' );
     $tmp = download_url( $url );  // Download file to temp location, returns full server path to temp file, ex; /home/user/public_html/mysite/wp-content/26192277_640.tmp
@@ -183,6 +183,10 @@ function wpdf_save_image($url, $post_id, $thumb = 0, $filename = "", $keyword = 
         $post_data['post_parent'] = $post_id;
     }
 
+    if(!empty($attr)) {
+	$post_data['post_excerpt'] = $attr;
+    }
+    
     require_once(ABSPATH . 'wp-admin/includes/file.php');
     require_once(ABSPATH . 'wp-admin/includes/media.php');
     require_once(ABSPATH . 'wp-admin/includes/image.php');
@@ -218,6 +222,7 @@ function wpdf_save_image_function() {
 	$thumb = $_POST["feat_img"];
 	$filename = $_POST["filename"];
 	$keyword = $_POST["keyword"];
+	$attr = $_POST["attr"];
 	
 	$nonce = $_POST["wpnonce"];
 	if (!wp_verify_nonce($nonce, 'wpdf_security_nonce')) {
@@ -235,7 +240,7 @@ function wpdf_save_image_function() {
 		exit;	
 	}
 
-	$newsrc = wpdf_save_image($url, $post_id, $thumb, $filename, $keyword);
+	$newsrc = wpdf_save_image($url, $post_id, $thumb, $filename, $keyword, $attr);
 
 	if(is_array($newsrc)) {
 		echo json_encode(array("error" => $newsrc["error"]));
@@ -274,7 +279,7 @@ function wpdf_save_multiple_images_function() {
 
 	foreach($images as $url) {
 	
-		$newsrc = wpdf_save_image($url, $post_id, $thumb, $filename, $keyword);
+		$newsrc = wpdf_save_image($url, $post_id, $thumb, $filename, $keyword, $attr);
 
 		if(is_array($newsrc)) {
 			echo json_encode(array("error" => $newsrc["error"]));

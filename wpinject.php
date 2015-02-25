@@ -2,7 +2,7 @@
 /**
  Plugin Name: ImageInject
  Plugin URI: http://wpscoop.com/wp-inject/
- Version: 1.11
+ Version: 1.12
  Description: Insert photos into your posts or set a featured image in less than a minute! ImageInject allows you to search the huge Flickr image database for creative commons photos directly from within your WordPress editor. Find great photos related to any topic and inject them into your post. Previously known as WP Inject.
  Author: Thomas Hoefter
  Author URI: http://wpscoop.com/
@@ -205,7 +205,11 @@ function wpdf_settings_page() {
 				<a title="Share ImageInject on Google+" target="_blank" class="wpdf_share_google" href="https://plus.google.com/share?url=http://wpscoop.com/wp-inject/"></a>
 			</p>		
 		</div>				
-		
+	
+		<div class="wpdf_settings_box">
+			<p style="margin-top: 0;"><strong>Multiple WordPress Sites? No Problem!</strong></p><p>Discover <a href="http://cmscommander.com/" target="_blank">CMS Commander</a> - the best way to manage multiple WordPress sites from a single dashboard. Try it for free now and see how much time you can save!
+		</div>	
+	
 		<div class="wpdf_settings_box">
 			<a title="Visit WPscoop!" target="_blank" href="http://wpscoop.com/"><img src="<?php echo plugins_url( '', __FILE__ ); ?>/images/WPscoop-logo.png" alt="WPscoop logo" /></a>	
 			<p>Check out <a target="_blank" title="Visit WPscoop!" href="http://wpscoop.com/"><strong>WPscoop.com</strong></a> where I blog about WordPress and publish my free plugins.</p>

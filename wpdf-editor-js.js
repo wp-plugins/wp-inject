@@ -496,7 +496,7 @@ jQuery(document).ready(function($) {
 					jthis.show();
 					wpdf_set_message(response.error, 1, 0, loader);
 				} else {
-					var attribution = wpdf_parse_attribution(item, module, 0); 
+					var attribution = wpdf_parse_attribution(item, module, 1); 
 
 					wpdf_parse_content("FIMG", attribution, 1);
 
@@ -523,6 +523,8 @@ jQuery(document).ready(function($) {
 		var keyword = jQuery('#wpdf_keyword').val();
 		var attrcontent = wpdf_parse_attribution(item, module, 0);
 
+		var attrcontent2 = wpdf_parse_attribution(item, module, 1);
+		
 		if(wpdf_save_images == 1 || module == "pixabay") {
 		
 			if(module == "flickr") {
@@ -538,7 +540,8 @@ jQuery(document).ready(function($) {
 				src: imgurl,
 				post_id: cur_post_id,
 				filename: wpdf_filename_template,
-				keyword: keyword				
+				keyword: keyword,
+				attr: attrcontent2
 			};
 
 			jQuery.ajax ({
